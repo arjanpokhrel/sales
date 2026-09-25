@@ -1,0 +1,281 @@
+export const translations = {
+  en: {
+    app: {
+      name: 'NepaReady',
+      tagline: 'Your Nepal. Always Ready.',
+      stayReady: 'Stay Ready. Even Offline.',
+      heroSubtitle: 'Access essential emergency information, maps and local services even when your connection is unavailable.',
+      demoMode: 'DEMO MODE',
+      simulateOffline: 'Simulate Offline',
+      simulateOnline: 'Restore Online'
+    },
+    status: {
+      online: 'Online',
+      offline: 'Offline',
+      offlineReady: 'Offline Ready',
+      locationAvailable: 'Location Available',
+      locationUnavailable: 'Location Unavailable',
+      gpsNotice: 'GPS functions via satellites without internet, but downloaded maps are needed for offline navigation.',
+      verified: 'Verified Official',
+      communitySubmitted: 'Community Submitted',
+      lastVerified: 'Last verified'
+    },
+    nav: {
+      home: 'Home',
+      map: 'Map',
+      emergency: 'Emergency',
+      help: 'Nearby Help',
+      guides: 'Guides',
+      packs: 'Offline Packs',
+      transport: 'Transport',
+      travel: 'Travel Mode',
+      profile: 'Profile',
+      admin: 'Admin'
+    },
+    emergency: {
+      title: 'EMERGENCY',
+      subtitle: 'One-tap direct cellular dialing for verified Nepal emergency responders.',
+      police: 'Police',
+      fire: 'Fire',
+      ambulance: 'Ambulance',
+      disaster: 'Disaster Ops',
+      armedPolice: 'Armed Police',
+      traffic: 'Traffic Police',
+      childHelpline: 'Child Helpline',
+      callNow: 'Call',
+      cellularNotice: 'Emergency calls operate over cellular GSM networks. They do not require internet data.',
+      sosBtn: 'SOS EMERGENCY',
+      sosSubtitle: 'Tap for high-urgency coordination, GPS coordinate transmission, and loud alarm.'
+    },
+    sos: {
+      screenTitle: 'EMERGENCY SOS',
+      warning: 'Use during genuine emergency distress. This interface broadcasts your exact coordinates.',
+      coordinatesTitle: 'Current Coordinates',
+      latitude: 'Latitude',
+      longitude: 'Longitude',
+      accuracy: 'Accuracy',
+      shareCoords: 'Share Location via SMS / WhatsApp',
+      copyCoords: 'Copy Coordinates',
+      copied: 'Coordinates Copied!',
+      flashSiren: 'Emergency Strobe & Alarm',
+      startSiren: 'Trigger Alarm Siren',
+      stopSiren: 'Stop Siren'
+    },
+    quickActions: {
+      offlineMap: 'Offline Map',
+      offlineMapDesc: 'Explore saved areas without internet.',
+      emergency: 'Emergency',
+      emergencyDesc: 'Quick access to emergency services.',
+      findHelp: 'Find Help',
+      findHelpDesc: 'Find hospitals, police, fire stations and pharmacies.',
+      emergencyGuides: 'Emergency Guides',
+      emergencyGuidesDesc: 'Know what to do when it matters.'
+    },
+    map: {
+      title: 'Offline Map & Directory',
+      searchPlaceholder: 'Search hospitals, police, pharmacies, ATMs in saved areas...',
+      allCategories: 'All Categories',
+      hospitals: 'Hospitals',
+      police: 'Police',
+      fireStations: 'Fire',
+      pharmacies: 'Pharmacies',
+      atms: 'ATMs',
+      transport: 'Bus & Transit',
+      directions: 'Directions',
+      call: 'Call',
+      offlineRoutingNote: 'Offline straight-line compass bearing. Full internet routing unavailable offline.',
+      distanceAway: 'away'
+    },
+    packs: {
+      title: 'Offline Packs',
+      subtitle: 'Download city and regional packages before losing connection.',
+      availablePacks: 'Available Regional Packs',
+      download: 'Download Pack',
+      downloading: 'Downloading...',
+      downloaded: 'Downloaded ✓',
+      updateAvailable: 'Update Available',
+      deletePack: 'Delete Pack',
+      storageUsed: 'Storage Used',
+      included: 'Included in this pack:',
+      lastUpdated: 'Last updated'
+    },
+    guides: {
+      title: 'Emergency Guides',
+      subtitle: 'Disaster preparedness, immediate actions, and life-saving first aid protocols.',
+      availableOffline: 'Available Offline ✓',
+      ifStartsNow: 'IF IT STARTS NOW',
+      afterShaking: 'AFTER THE EVENT',
+      doNot: '⚠️ DO NOT',
+      whenToSeekHelp: 'When to Seek Immediate Medical Help',
+      emergencyContacts: 'Direct Emergency Contacts',
+      source: 'Authoritative Source'
+    },
+    transport: {
+      title: 'Public Transport',
+      subtitle: 'Local transit routes, schedules, stops, and fare information.',
+      stops: 'Stops',
+      operatingHours: 'Hours',
+      fare: 'Estimated Fare',
+      lastVerified: 'Last verified'
+    },
+    travel: {
+      title: 'Travel Mode',
+      subtitle: 'Prepare complete offline bundles before traveling across Nepal.',
+      origin: 'Departure City',
+      destination: 'Arrival City',
+      recommendation: 'Recommended Travel Bundle',
+      downloadTravelPack: 'Download Travel Pack'
+    },
+    profile: {
+      title: 'My Profile',
+      savedPlaces: 'Saved Places (Offline Ready)',
+      addPlace: 'Save New Place',
+      personalContacts: 'Personal Emergency Contacts',
+      addContact: 'Add Contact',
+      callContact: 'Call Contact',
+      login: 'Sign In',
+      register: 'Create Account',
+      logout: 'Sign Out'
+    }
+  },
+
+  ne: {
+    app: {
+      name: 'नेपारेडी',
+      tagline: 'तपाईँको नेपाल। सधैँ तत्पर।',
+      stayReady: 'सधैँ तत्पर। अफलाइनमा पनि।',
+      heroSubtitle: 'इन्टरनेट नभएको अवस्थामा पनि आवश्यक आपतकालीन सूचना, नक्सा र स्थानीय सेवाहरू तत्काल प्राप्त गर्नुहोस्।',
+      demoMode: 'डेमो मोड',
+      simulateOffline: 'अफलाइन अनुकरण गर्नुहोस्',
+      simulateOnline: 'अनलाइन पुनस्थापित गर्नुहोस्'
+    },
+    status: {
+      online: 'अनलाइन',
+      offline: 'अफलाइन',
+      offlineReady: 'अफलाइन तयार',
+      locationAvailable: 'स्थान उपलब्ध',
+      locationUnavailable: 'स्थान अनुपलब्ध',
+      gpsNotice: 'जीपीएस भूउपग्रहबाट चल्छ, तर अफलाइन नेभिगेसनका लागि नक्सा पहिले नै डाउनलोड भएको हुनुपर्छ।',
+      verified: 'प्रमाणित आधिकारिक',
+      communitySubmitted: 'समुदायबाट प्राप्त',
+      lastVerified: 'पछिल्लो प्रमाणीकरण'
+    },
+    nav: {
+      home: 'गृहपृष्ठ',
+      map: 'नक्सा',
+      emergency: 'आपतकालीन',
+      help: 'नजिकको मद्दत',
+      guides: 'निर्देशिका',
+      packs: 'अफलाइन प्याक',
+      transport: 'यातायात',
+      travel: 'यात्रा मोड',
+      profile: 'प्रोफाइल',
+      admin: 'प्रशासन'
+    },
+    emergency: {
+      title: 'आपतकालीन सेवा',
+      subtitle: 'नेपालका आधिकारिक आपतकालीन उद्धार केन्द्रहरूमा सिधै सम्पर्क गर्नुहोस्।',
+      police: 'प्रहरी',
+      fire: 'दमकल',
+      ambulance: 'एम्बुलेन्स',
+      disaster: 'विपद् व्यवस्थापन',
+      armedPolice: 'सशस्त्र प्रहरी',
+      traffic: 'ट्राफिक प्रहरी',
+      childHelpline: 'बाल हेल्पलाइन',
+      callNow: 'फोन गर्नुहोस्',
+      cellularNotice: 'आपतकालीन फोन कल मोबाइल नेटवर्क (GSM) मार्फत हुन्छ। यसका लागि इन्टरनेट चाहिँदैन।',
+      sosBtn: 'एसओएस आपतकालीन',
+      sosSubtitle: 'तत्काल उद्धार, जीपीएस स्थान आदानप्रदान र अलार्मका लागि थिच्नुहोस्।'
+    },
+    sos: {
+      screenTitle: 'एसओएस (SOS) आपतकालीन उद्धार',
+      warning: 'वास्तविक आपतकालीन अवस्थामा मात्र प्रयोग गर्नुहोस्। यसले तपाईँको सही जीपीएस स्थान देखाउँछ।',
+      coordinatesTitle: 'हालको जीपीएस स्थान',
+      latitude: 'अक्षांश (Latitude)',
+      longitude: 'देशान्तर (Longitude)',
+      accuracy: 'शुद्धता (Accuracy)',
+      shareCoords: 'एसएमएस वा ह्वाट्सएपमा स्थान पठाउनुहोस्',
+      copyCoords: 'स्थान कपी गर्नुहोस्',
+      copied: 'कपी गरियो!',
+      flashSiren: 'आपतकालीन अलार्म तथा साइरन',
+      startSiren: 'साइरन बजाउनुहोस्',
+      stopSiren: 'साइरन बन्द गर्नुहोस्'
+    },
+    quickActions: {
+      offlineMap: 'अफलाइन नक्सा',
+      offlineMapDesc: 'इन्टरनेटबिना सुरक्षित गरिएका क्षेत्रहरू हेर्नुहोस्।',
+      emergency: 'आपतकालीन',
+      emergencyDesc: 'आपतकालीन सेवाहरूमा छिटो पहुँच।',
+      findHelp: 'मद्दत खोज्नुहोस्',
+      findHelpDesc: 'अस्पताल, प्रहरी, दमकल र औषधि पसलहरू फेला पार्नुहोस्।',
+      emergencyGuides: 'सुरक्षा निर्देशिका',
+      emergencyGuidesDesc: 'विपद्को समयमा के गर्ने जान्नुहोस्।'
+    },
+    map: {
+      title: 'अफलाइन नक्सा तथा निर्देशिका',
+      searchPlaceholder: 'अस्पताल, प्रहरी, औषधि पसल खोज्नुहोस्...',
+      allCategories: 'सबै वर्गहरू',
+      hospitals: 'अस्पताल',
+      police: 'प्रहरी',
+      fireStations: 'दमकल',
+      pharmacies: 'औषधि पसल',
+      atms: 'एटीएम',
+      transport: 'बस तथा यातायात',
+      directions: 'बाटो हेर्नुहोस्',
+      call: 'फोन गर्नुहोस्',
+      offlineRoutingNote: 'अफलाइन सिधा दूरी र दिशा मात्र उपलब्ध। पूर्ण रुट इन्टरनेट हुँदा मात्र चल्छ।',
+      distanceAway: 'टाढा'
+    },
+    packs: {
+      title: 'अफलाइन प्याकहरू',
+      subtitle: 'इन्टरनेट टुट्नु अगावै आफ्नो सहर वा क्षेत्रको डाटा सुरक्षित गर्नुहोस्।',
+      availablePacks: 'उपलब्ध क्षेत्रीय प्याकहरू',
+      download: 'प्याक डाउनलोड गर्नुहोस्',
+      downloading: 'डाउनलोड हुँदैछ...',
+      downloaded: 'डाउनलोड भयो ✓',
+      updateAvailable: 'नयाँ अपडेट उपलब्ध',
+      deletePack: 'प्याक मेटाउनुहोस्',
+      storageUsed: 'प्रयोग भएको मेमोरी',
+      included: 'यस प्याकमा समावेश:',
+      lastUpdated: 'पछिल्लो अद्यावधिक'
+    },
+    guides: {
+      title: 'सुरक्षा तथा विपद् निर्देशिका',
+      subtitle: 'भूकम्प, बाढी, पहिरो तथा प्राथमिक उपचारका जीवनरक्षक उपायहरू।',
+      availableOffline: 'अफलाइन उपलब्ध ✓',
+      ifStartsNow: 'तत्काल गर्नुपर्ने काम',
+      afterShaking: 'विपद् रोकिएपछि',
+      doNot: '⚠️ के नगर्ने?',
+      whenToSeekHelp: 'कस्तो अवस्थामा तुरुन्त अस्पताल जाने?',
+      emergencyContacts: 'सिधा सम्पर्क नम्बरहरू',
+      source: 'आधिकारिक स्रोत'
+    },
+    transport: {
+      title: 'सार्वजनिक यातायात',
+      subtitle: 'स्थानीय बस रुट, बिसौनी, समय तालिका र भाडा दर।',
+      stops: 'बिसौनीहरू',
+      operatingHours: 'सञ्चालन समय',
+      fare: 'अनुमानित भाडा',
+      lastVerified: 'पछिल्लो प्रमाणीकरण'
+    },
+    travel: {
+      title: 'यात्रा मोड',
+      subtitle: 'नेपालभित्र यात्रा सुरु गर्नुअघि पूर्ण अफलाइन प्याकेज तयार गर्नुहोस्।',
+      origin: 'यात्रा सुरु हुने सहर',
+      destination: 'पुग्ने सहर',
+      recommendation: 'सिफारिस गरिएको यात्रा प्याक',
+      downloadTravelPack: 'यात्रा प्याक डाउनलोड गर्नुहोस्'
+    },
+    profile: {
+      title: 'मेरो प्रोफाइल',
+      savedPlaces: 'सुरक्षित गरिएका स्थानहरू (अफलाइन उपलब्ध)',
+      addPlace: 'नयाँ स्थान थप्नुहोस्',
+      personalContacts: 'व्यक्तिगत आपतकालीन सम्पर्क',
+      addContact: 'सम्पर्क थप्नुहोस्',
+      callContact: 'फोन गर्नुहोस्',
+      login: 'लगइन गर्नुहोस्',
+      register: 'खाता खोल्नुहोस्',
+      logout: 'लगआउट'
+    }
+  }
+};

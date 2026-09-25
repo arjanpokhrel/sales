@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Outer Shield Badge -->
+  <path d="M50 8 L88 22 V50 C88 72 50 92 50 92 C50 92 12 72 12 50 V22 Z" fill="#0B192C" stroke="#DC2626" stroke-width="4" stroke-linejoin="round"/>
+  
+  <!-- Subtle Nepal Mountain Peaks (Himalayas) inside Shield -->
+  <path d="M22 62 L38 38 L50 52 L64 32 L80 62 Z" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
+  <path d="M38 38 L43 45 L34 47 Z" fill="#F8FAFC"/>
+  <path d="M64 32 L70 41 L60 43 Z" fill="#F8FAFC"/>
+
+  <!-- Nepal Emergency Pin Symbol -->
+  <path d="M50 36 C42 36 36 42 36 50 C36 60 50 74 50 74 C50 74 64 60 64 50 C64 42 58 36 50 36 Z" fill="#DC2626" stroke="#FEF2F2" stroke-width="2"/>
+  
+  <!-- Center White Protection Dot -->
+  <circle cx="50" cy="48" r="5" fill="#FFFFFF"/>
+</svg>

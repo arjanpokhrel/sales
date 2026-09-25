@@ -1,0 +1,19 @@
+{
+  "name": "NepaReady — Your Nepal. Always Ready.",
+  "short_name": "NepaReady",
+  "description": "Offline-First Nepal Emergency, Navigation and Utility Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B192C",
+  "theme_color": "#0B192C",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline — NepaReady</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0B192C;
+      color: #F8FAFC;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .card {
+      max-width: 440px;
+      margin: 20px;
+      padding: 32px 24px;
+      background-color: #1E293B;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #450A0A;
+      color: #FCA5A5;
+      border: 1px solid #7F1D1D;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: #FFFFFF;
+    }
+    p {
+      color: #94A3B8;
+      font-size: 15px;
+      line-height: 1.5;
+      margin: 0 0 24px 0;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #DC2626;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background-color: #B91C1C;
+    }
+    .emergency-box {
+      margin-top: 24px;
+      padding: 16px;
+      background-color: #0F172A;
+      border-radius: 10px;
+      border: 1px solid #1E293B;
+    }
+    .emergency-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #EF4444;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .tel-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      font-size: 14px;
+    }
+    .tel-links a {
+      color: #38BDF8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">
+      <span>🔴</span> You are offline
+    </div>
+    <h1>Your Nepal. Always Ready.</h1>
+    <p>
+      Your internet connection is currently unavailable, but your downloaded <strong>NepaReady Offline Packs</strong>, emergency directories, and disaster guides are still stored locally on your device.
+    </p>
+    <a href="/" class="btn">Open Offline App</a>
+
+    <div class="emergency-box">
+      <div class="emergency-title">Direct Cellular Dialing</div>
+      <div class="tel-links">
+        <a href="tel:100">🚓 Police (100)</a>
+        <a href="tel:101">🔥 Fire (101)</a>
+        <a href="tel:102">🚑 Ambulance (102)</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
