@@ -45,6 +45,9 @@ class Storage {
       if (fs.existsSync(DATA_FILE)) {
         const fileContent = fs.readFileSync(DATA_FILE, 'utf-8');
         this.data = JSON.parse(fileContent);
+        // Additive merge: pick up new seed records (e.g. more hospitals)
+        // without touching user data or admin edits.
+        this.mergeSeed();
       } else {
         await this.seed();
       }
@@ -54,6 +57,34 @@ class Storage {
     }
 
     this.initialized = true;
+  }
+
+  // Adds seed records that are missing by id. Never modifies or deletes
+  // existing rows, so user data and admin edits are preserved.
+  mergeSeed() {
+    let added = 0;
+    const ensure = (key, seeds) => {
+      if (!Array.isArray(this.data[key])) this.data[key] = [];
+      const have = new Set(this.data[key].map((r) => r.id ?? r.slug));
+      for (const s of seeds) {
+        const k = s.id ?? s.slug;
+        if (!have.has(k)) {
+          this.data[key].push({ ...s });
+          have.add(k);
+          added++;
+        }
+      }
+    };
+    ensure('locations', locations);
+    ensure('guides', guides);
+    ensure('offlinePacks', offlinePacks);
+    ensure('transportRoutes', transportRoutes);
+    ensure('locationCategories', locationCategories);
+    ensure('emergencyServices', emergencyServices);
+    if (added > 0) {
+      console.log(`🌱 Seed merge: +${added} new bundled records (user data preserved)`);
+      this.save();
+    }
   }
 
   async seed() {

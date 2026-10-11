@@ -104,12 +104,17 @@ describe('🇳🇵 NepaReady Full-Stack Verification Suite', () => {
     assert.strictEqual(res.status, 200);
     const data = await res.json();
     assert.ok(data.locations.length > 0);
+    const statuses = new Set();
     for (const loc of data.locations) {
       assert.strictEqual(loc.category_id, 'hospital');
       assert.ok(loc.latitude);
       assert.ok(loc.longitude);
-      assert.strictEqual(loc.verification_status, 'verified');
+      // Honest model: verified pins + clearly-flagged approximate pins, never invented.
+      assert.ok(['verified', 'verified_official', 'approximate'].includes(loc.verification_status));
+      statuses.add(loc.verification_status);
     }
+    assert.ok(statuses.has('verified'), 'keeps verified hospitals');
+    assert.ok(statuses.has('approximate'), 'flags approximate pins honestly');
   });
 
   // 6. Action Guides

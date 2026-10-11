@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+/* Bundled offline fonts: Inter (latin) + Noto Sans Devanagari. */
+@font-face {
+  font-family: 'Inter';
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/inter-400-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans Devanagari';
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/notosansdevanagari-400-devanagari.woff2') format('woff2');
+}
+
 @layer base {
   :root {
     --nepal-navy: #0B192C;
@@ -8,11 +22,71 @@
     --nepal-crimson: #991B1B;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: #080E1A;
     color: #F8FAFC;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", sans-serif;
+    font-family: 'Inter', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Route transition: every page fades + rises once on mount. */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+main > * {
+  animation: page-enter 0.28s ease-out;
+}
+
+/* Bottom-sheet / drawer entrance (used by the map sheet). */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-slide-up {
+  animation: slide-up 0.32s cubic-bezier(0.21, 1.02, 0.73, 1);
+}
+
+/* Photos ease in on render — pure CSS so it can never get stuck. */
+@keyframes img-in {
+  from { opacity: 0.25; }
+  to { opacity: 1; }
+}
+main img {
+  animation: img-in 0.4s ease-out;
+}
+
+/* Loading shimmer for skeletons. */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #1E293B 25%, #334155 50%, #1E293B 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* Live-location ring pulse. */
+@keyframes live-ring {
+  0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6); }
+  70% { box-shadow: 0 0 0 14px rgba(56, 189, 248, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+.animate-live-ring {
+  animation: live-ring 1.8s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  main > *, .animate-slide-up, .animate-live-ring, .animate-sos-pulse {
+    animation: none !important;
   }
 }
 

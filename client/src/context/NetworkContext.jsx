@@ -22,6 +22,9 @@ export function NetworkProvider({ children }) {
     longitude: 87.2718,
     accuracy: 15,
     altitude: null,
+    heading: null, // degrees, when the device reports motion
+    speed: null, // m/s, when the device reports motion
+    updatedAt: null,
     isRealGps: false
   });
 
@@ -108,6 +111,11 @@ export function NetworkProvider({ children }) {
           longitude: position.coords.longitude,
           accuracy: Math.round(position.coords.accuracy || 10),
           altitude: position.coords.altitude ? Math.round(position.coords.altitude) : null,
+          heading: position.coords.heading != null && !Number.isNaN(position.coords.heading)
+            ? Math.round(position.coords.heading) : null,
+          speed: position.coords.speed != null && !Number.isNaN(position.coords.speed)
+            ? Number(position.coords.speed.toFixed(1)) : null,
+          updatedAt: Date.now(),
           isRealGps: true
         });
         setGpsStatus('available');

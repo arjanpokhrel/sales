@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, MapPin, Phone, Navigation, Bookmark, BookmarkCheck } from 'lucide-react';
+import { ArrowLeft, MapPin, Phone, Navigation, Bookmark, BookmarkCheck, Copy, Check } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { db, pushRecent, toggleBookmark, haversineKm } from '../offline/db';
+import { getLivePlace } from '../data/liveDirectory';
+import { useCopy } from '../components/useCopy';
 
 // Detail for directory places (hospitals, police, pharmacies…).
 // Distances are straight-line approximations; routing needs internet.
@@ -12,11 +14,19 @@ export default function PlaceDetailPage() {
   const [place, setPlace] = useState(null);
   const [saved, setSaved] = useState(false);
   const [dist, setDist] = useState(null);
+  const [nearby, setNearby] = useState([]);
+  const { copied, copy } = useCopy();
 
   useEffect(() => {
     (async () => {
-      let p = await db.locations.get(Number(id)).catch(() => null);
-      if (!p) p = await db.locations.get(id).catch(() => null);
+      let p = null;
+      if (String(id).startsWith('osm-')) {
+        // Live OSM result from the map — kept in a memory cache, expires on reload.
+        p = getLivePlace(id);
+      } else {
+        p = await db.locations.get(Number(id)).catch(() => null);
+        if (!p) p = await db.locations.get(id).catch(() => null);
+      }
       if (!p && !navigator.onLine) return;
       if (!p) {
         try {
@@ -37,15 +47,34 @@ export default function PlaceDetailPage() {
             () => {}, { timeout: 8000 }
           );
         }
+        // Nearby directory places with coordinates (straight-line, approximate)
+        try {
+          const all = await db.locations.toArray();
+          const plat = Number(p.latitude), plng = Number(p.longitude);
+          if (plat && plng) {
+            setNearby(all
+              .filter((o) => String(o.id) !== String(p.id) && Number(o.latitude) && Number(o.longitude))
+              .map((o) => ({ ...o, _km: haversineKm(plat, plng, Number(o.latitude), Number(o.longitude)) }))
+              .sort((a, b) => a._km - b._km)
+              .slice(0, 4));
+          }
+        } catch { /* ignore */ }
       }
     })();
   }, [id]);
 
   if (!place) {
+    const isLive = String(id).startsWith('osm-');
     return (
       <div className="max-w-3xl mx-auto px-4 py-16 text-center space-y-3">
-        <p className="text-slate-400 text-sm">{lang === 'ne' ? 'स्थान भेटिएन वा अफलाइनमा उपलब्ध छैन।' : 'Place not found or not downloaded for offline.'}</p>
-        <Link to="/help" className="text-sky-400 text-sm font-bold">← {lang === 'ne' ? 'नजिकको मद्दत' : 'Nearby help'}</Link>
+        <p className="text-slate-400 text-sm">
+          {isLive
+            ? (lang === 'ne'
+              ? 'यो लाइभ नतिजाको म्याद सकियो — नक्सामा गएर फेरि खोज्नुहोस्।'
+              : 'This live result expired — search again from the map.')
+            : (lang === 'ne' ? 'स्थान भेटिएन वा अफलाइनमा उपलब्ध छैन।' : 'Place not found or not downloaded for offline.')}
+        </p>
+        <Link to="/map" className="text-sky-400 text-sm font-bold">← {lang === 'ne' ? 'नक्सा' : 'Map'}</Link>
       </div>
     );
   }
@@ -104,6 +133,62 @@ export default function PlaceDetailPage() {
           </p>
         )}
       </div>
+
+      {/* Every stored fact about this place */}
+      <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800">
+        <h2 className="font-bold text-white text-sm mb-3">
+          {lang === 'ne' ? 'सबै विवरण' : 'All details'}
+        </h2>
+        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 text-sm">
+          {[
+            [lang === 'ne' ? 'श्रेणी' : 'Category', place.category_id || '—'],
+            [lang === 'ne' ? 'क्षेत्र' : 'Region', place.region || '—'],
+            [lang === 'ne' ? 'ठेगाना' : 'Address', place.address_en || place.address_ne || '—'],
+            [lang === 'ne' ? 'फोन' : 'Phone', place.phone || place.emergency_phone || '—'],
+            [lang === 'ne' ? 'सिधा दूरी' : 'Straight-line distance',
+              dist != null ? `≈ ${dist.toFixed(dist < 10 ? 1 : 0)} km` : '—'],
+          ].map(([k, v]) => (
+            <div key={k} className="flex justify-between gap-3 py-1.5 border-b border-slate-800/70">
+              <dt className="text-slate-400 text-xs">{k}</dt>
+              <dd className="text-slate-100 text-xs font-semibold text-right">{v}</dd>
+            </div>
+          ))}
+        </dl>
+        {(place.latitude && place.longitude) && (
+          <button
+            onClick={() => copy(`${Number(place.latitude).toFixed(5)}, ${Number(place.longitude).toFixed(5)}`)}
+            className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-slate-100 transition active:scale-95"
+          >
+            {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+            {Number(place.latitude).toFixed(5)}, {Number(place.longitude).toFixed(5)}
+            <span className="text-slate-400 font-semibold">
+              {copied ? (lang === 'ne' ? '✓ कपी भयो' : '✓ Copied') : (lang === 'ne' ? '· कपी' : '· Copy')}
+            </span>
+          </button>
+        )}
+      </div>
+
+      {/* Nearby places */}
+      {nearby.length > 0 && (
+        <div>
+          <h2 className="text-lg font-bold text-white mb-3">
+            {lang === 'ne' ? 'नजिकका स्थानहरू' : 'Nearby places'}
+          </h2>
+          <div className="space-y-2">
+            {nearby.map((n) => (
+              <Link key={n.id} to={`/places/${n.id}`}
+                className="flex items-center gap-3 p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-700 transition">
+                <MapPin className="w-4 h-4 text-sky-400 flex-shrink-0" />
+                <div className="flex-1">
+                  <div className="font-semibold text-white text-sm">{lang === 'ne' ? (n.name_ne || n.name_en) : (n.name_en || n.name_ne)}</div>
+                  <div className="text-[11px] text-slate-400">{n.category_id}</div>
+                </div>
+                <div className="text-[11px] text-emerald-300 font-bold">≈ {n._km.toFixed(n._km < 10 ? 1 : 0)} km</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

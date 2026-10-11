@@ -1,12 +1,19 @@
 // NepaReady Offline Service Worker
-const CACHE_NAME = 'nepready-v2.0';
+const CACHE_NAME = 'nepready-v2.1';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/offline.html',
   '/logo.svg',
   '/manifest.webmanifest',
-  '/photos/attribution.json'
+  '/photos/attribution.json',
+  '/fonts/inter-400-latin.woff2',
+  '/fonts/inter-600-latin.woff2',
+  '/fonts/inter-700-latin.woff2',
+  '/fonts/inter-800-latin.woff2',
+  '/fonts/notosansdevanagari-400-devanagari.woff2',
+  '/fonts/notosansdevanagari-600-devanagari.woff2',
+  '/fonts/notosansdevanagari-700-devanagari.woff2'
 ];
 
 self.addEventListener('install', (event) => {

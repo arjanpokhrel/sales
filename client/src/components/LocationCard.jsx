@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { PhoneCall, Navigation, ShieldCheck, ChevronDown, ChevronUp, MapPin } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useNetwork } from '../context/NetworkContext';
@@ -78,10 +79,18 @@ export default function LocationCard({ location, onSelectLocation, isSelected = 
             <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-slate-800 text-slate-300">
               {location.category_id}
             </span>
-            {location.verification_status === 'verified' ? (
+            {location.verification_status === 'verified' || location.verification_status === 'verified_official' ? (
               <span className="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>{t('status.verified')}</span>
+              </span>
+            ) : location.verification_status === 'approximate' ? (
+              <span className="text-[11px] text-amber-300 font-bold">
+                📍 {isNepali ? 'अनुमानित स्थान' : 'Approximate pin'}
+              </span>
+            ) : location.verification_status === 'osm_live' ? (
+              <span className="text-[11px] text-sky-300 font-bold">
+                ● {isNepali ? 'लाइभ OSM' : 'LIVE OSM'}
               </span>
             ) : (
               <span className="text-[11px] text-amber-400 font-medium">
@@ -107,18 +116,40 @@ export default function LocationCard({ location, onSelectLocation, isSelected = 
         )}
       </div>
 
-      {/* Description when expanded */}
+      {/* Description when expanded — every stored fact, nothing invented */}
       {expanded && (
         <div className="mt-3 pt-3 border-t border-slate-800 text-xs text-slate-300 space-y-1.5">
-          <p>{description}</p>
+          {description ? <p>{description}</p> : null}
           <div className="text-[11px] text-slate-400">
-            <strong>Operating:</strong> {location.operating_hours || '24/7'}
+            <strong>{isNepali ? 'समय:' : 'Hours:'}</strong>{' '}
+            {location.operating_hours || (isNepali ? 'सूची छैन' : 'Not listed')}
           </div>
+          {phoneNumber && (
+            <div className="text-[11px] text-slate-400">
+              <strong>{isNepali ? 'फोन:' : 'Phone:'}</strong> {phoneNumber}
+            </div>
+          )}
           <div className="text-[11px] text-slate-400">
-            <strong>Verified Source:</strong> {location.source || 'NepaReady Disaster Authority'}
+            <strong>{isNepali ? 'स्रोत:' : 'Source:'}</strong> {location.source || 'NepaReady'}
+            {location.verified_at || location.last_verified
+              ? ` · ${(location.verified_at || location.last_verified)}` : ''}
           </div>
+          {location.verification_status === 'approximate' && (
+            <div className="text-[11px] text-amber-300">
+              {isNepali
+                ? '📍 यो पिन अनुमानित हो — पुगेर पुष्टि गर्नुहोस्।'
+                : '📍 Approximate pin — confirm when you arrive.'}
+            </div>
+          )}
+          {location.verification_status === 'osm_live' && (
+            <div className="text-[11px] text-sky-300">
+              {isNepali
+                ? '● OpenStreetMap को ताजा नतिजा — आपतकालमा प्रयोग अघि पुष्टि गर्नुहोस्।'
+                : '● Fresh OpenStreetMap result — verify before emergency use.'}
+            </div>
+          )}
           <div className="text-[10px] text-slate-500">
-            GPS: {location.latitude.toFixed(4)}, {location.longitude.toFixed(4)}
+            GPS: {Number(location.latitude).toFixed(5)}, {Number(location.longitude).toFixed(5)}
           </div>
         </div>
       )}
@@ -156,6 +187,14 @@ export default function LocationCard({ location, onSelectLocation, isSelected = 
           <span>{expanded ? 'Less' : 'Details'}</span>
           {expanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
         </button>
+
+        <Link
+          to={`/places/${location.id}`}
+          onClick={(e) => e.stopPropagation()}
+          className="text-xs font-bold text-sky-400 hover:text-sky-300 p-1 whitespace-nowrap"
+        >
+          {isNepali ? 'पूरा विवरण →' : 'Full details →'}
+        </Link>
       </div>
     </div>
   );
