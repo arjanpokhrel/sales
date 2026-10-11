@@ -1,9 +1,15 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { storage } from '../database/storage.js';
 import { config } from '../config/index.js';
 import { authenticate, requireAdmin, optionalAuth } from '../middleware/auth.js';
+import { PROVINCES } from '../data/provinces.js';
+import { DESTINATIONS } from '../data/destinations.js';
+import { DATA_VERSION, EMERGENCY_NUMBERS } from '../data/essential.js';
 
 export const apiRouter = express.Router();
 
@@ -172,6 +178,67 @@ apiRouter.get('/offline-packs/:id/download', (req, res) => {
     return res.status(404).json({ error: 'Offline pack bundle not found' });
   }
   res.json(bundle);
+});
+
+// ----------------------------------------------------
+// Provinces, Destinations & Full-Country Manifest (bundled data API)
+// ----------------------------------------------------
+apiRouter.get('/provinces', (req, res) => {
+  res.json({ provinces: PROVINCES, count: PROVINCES.length, version: DATA_VERSION });
+});
+
+apiRouter.get('/provinces/:id', (req, res) => {
+  const p = PROVINCES.find((x) => x.id === req.params.id);
+  if (!p) return res.status(404).json({ error: 'Province not found' });
+  res.json({ province: p, destinations: DESTINATIONS.filter((d) => d.province === p.id) });
+});
+
+apiRouter.get('/destinations', (req, res) => {
+  const { province, category, search } = req.query;
+  let items = DESTINATIONS;
+  if (province) items = items.filter((d) => d.province === province);
+  if (category) items = items.filter((d) => d.category === category);
+  if (search) {
+    const q = search.toLowerCase();
+    items = items.filter((d) =>
+      d.name_en.toLowerCase().includes(q) || d.name_ne.includes(search) ||
+      d.district.toLowerCase().includes(q));
+  }
+  res.json({ destinations: items, count: items.length, version: DATA_VERSION });
+});
+
+apiRouter.get('/destinations/:id', (req, res) => {
+  const d = DESTINATIONS.find((x) => x.id === req.params.id);
+  if (!d) return res.status(404).json({ error: 'Destination not found' });
+  res.json({ destination: d });
+});
+
+// Verifiable full-country manifest: counts, bytes, versions. Map tiles are
+// intentionally NOT listed here — they cache on view (see Download All page).
+apiRouter.get('/packages/manifest', (req, res) => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  let photos = [];
+  try {
+    const p = path.join(__dirname, '../../../client/public/photos/attribution.json');
+    photos = JSON.parse(fs.readFileSync(p, 'utf8')).photos || [];
+  } catch { /* client photos unavailable in this deploy */ }
+  const districts = PROVINCES.reduce((a, p) => a + p.districts.length, 0);
+  res.json({
+    id: 'nepal-full-2026-10',
+    version: DATA_VERSION,
+    generated: new Date().toISOString().slice(0, 10),
+    provinces: PROVINCES.length,
+    districts,
+    destinations: DESTINATIONS.length,
+    destination_ids: DESTINATIONS.map((d) => d.id),
+    emergency_numbers: EMERGENCY_NUMBERS.map((e) => ({ id: e.id, number: e.number, scope: e.scope })),
+    emergency_verified_on: '2026-10-11',
+    photos: photos.map((p) => ({ id: p.id, bytes: p.bytes, license: p.license })),
+    photo_bytes: photos.reduce((a, p) => a + (p.bytes || 0), 0),
+    municipalities_note: 'Municipality/ward data not bundled yet — district level only.',
+    map_tiles_note: 'Tiles cache on view per OSM policy; not part of this manifest.'
+  });
 });
 
 // ----------------------------------------------------

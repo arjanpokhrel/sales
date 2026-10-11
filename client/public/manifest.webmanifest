@@ -8,6 +8,7 @@
   "theme_color": "#0B192C",
   "orientation": "portrait-primary",
   "lang": "en",
+  "categories": ["travel", "navigation", "utilities"],
   "icons": [
     {
       "src": "/logo.svg",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Map, ShieldAlert, HeartPulse, BookOpen, HardDrive, PhoneCall, Radio, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Map, ShieldAlert, HeartPulse, BookOpen, HardDrive, PhoneCall, Radio, CheckCircle2, AlertTriangle, ArrowRight, Landmark, Mountain, DownloadCloud, Bookmark } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useNetwork } from '../context/NetworkContext';
 import QuickActionCard from '../components/QuickActionCard';
@@ -152,6 +152,47 @@ export default function HomePage() {
             description={t('quickActions.emergencyGuidesDesc')}
             icon={BookOpen}
             color="amber"
+          />
+        </div>
+      </section>
+
+      {/* 3b. Explore Nepal — provinces, destinations, downloads, saved */}
+      <section>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-extrabold text-white tracking-tight">
+            {lang === 'ne' ? 'नेपाल घुम्नुहोस्' : 'Explore Nepal'}
+          </h2>
+          <span className="text-xs text-slate-400">{lang === 'ne' ? 'अफलाइन उपलब्ध' : 'Available offline'}</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <QuickActionCard
+            to="/provinces"
+            title={lang === 'ne' ? 'प्रदेशहरू' : 'Provinces'}
+            description={lang === 'ne' ? '७ प्रदेश, ७७ जिल्ला।' : '7 provinces, 77 districts.'}
+            icon={Landmark}
+            color="blue"
+          />
+          <QuickActionCard
+            to="/destinations"
+            title={lang === 'ne' ? 'गन्तव्यहरू' : 'Destinations'}
+            description={lang === 'ne' ? 'फोटोसहितका घुम्ने ठाउँहरू।' : 'Places to visit, with real photos.'}
+            icon={Mountain}
+            color="emerald"
+          />
+          <QuickActionCard
+            to="/download-all"
+            title={lang === 'ne' ? 'सबै डाउनलोड' : 'Download All'}
+            description={lang === 'ne' ? 'सम्पूर्ण नेपाल एक ट्यापमा।' : 'All Nepal data in one tap.'}
+            icon={DownloadCloud}
+            color="amber"
+          />
+          <QuickActionCard
+            to="/bookmarks"
+            title={lang === 'ne' ? 'बुकमार्क' : 'Bookmarks'}
+            description={lang === 'ne' ? 'सुरक्षित ठाउँहरू।' : 'Your saved places.'}
+            icon={Bookmark}
+            color="red"
           />
         </div>
       </section>

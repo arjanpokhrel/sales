@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { Home, Map, PhoneCall, BookOpen, User, ShieldAlert } from 'lucide-react';
+import { Home, Map, Mountain, BookOpen, Bookmark, ShieldAlert } from 'lucide-react';
 
 export default function BottomNavigation() {
   const { t } = useLanguage();
@@ -9,17 +9,19 @@ export default function BottomNavigation() {
 
   const items = [
     { to: '/', label: t('nav.home'), icon: Home },
+    { to: '/destinations', label: t('nav.explore'), icon: Mountain },
     { to: '/map', label: t('nav.map'), icon: Map },
     { to: '/emergency', label: t('nav.emergency'), icon: ShieldAlert, isEmergency: true },
+    { to: '/bookmarks', label: t('nav.saved'), icon: Bookmark },
     { to: '/guides', label: t('nav.guides'), icon: BookOpen },
-    { to: '/profile', label: t('nav.profile'), icon: User }
   ];
 
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0B192C]/98 border-t border-slate-800 backdrop-blur-lg pb-safe">
       <nav className="flex items-center justify-around h-16 px-1">
         {items.map((item) => {
-          const isActive = location.pathname === item.to;
+          const isActive = location.pathname === item.to
+            || (item.to !== '/' && location.pathname.startsWith(item.to + '/'));
           const Icon = item.icon;
 
           if (item.isEmergency) {

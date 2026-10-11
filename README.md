@@ -1,5 +1,14 @@
 # 🇳🇵 NepaReady (नेपारेडी) — Your Nepal. Always Ready.
 
+> **v2.0 complete rebuild (2026-10-11).** Web PWA + Android (Capacitor) from one
+> codebase: 27 routes, 7 provinces / 77 districts, 18 destinations, 16 real
+> licensed photos (6.3 MB bundled), Download-All-Nepal manager, bookmarks,
+> recents, EN+NE throughout. Tests: **16/16 pass**. Honest limits (no invented
+> data, no fake routes, no claimed APK/URL) are listed in
+> [`docs/DATA_COMPLETENESS.md`](docs/DATA_COMPLETENESS.md); Android build steps
+> in [`docs/android-build.md`](docs/android-build.md); web deploy steps in
+> [`docs/deployment.md`](docs/deployment.md).
+
 > **Offline-first Nepal emergency, navigation, and utility Progressive Web App (PWA).**
 > Built specifically to provide critical life-saving information, maps, emergency contacts, and disaster action guides across Nepal even when cellular or WiFi internet disappears.
 

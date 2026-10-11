@@ -1,4 +1,7 @@
 import Dexie from 'dexie';
+import { PROVINCES } from '../data/provinces';
+import { DESTINATIONS } from '../data/destinations';
+import { EMERGENCY_NUMBERS, DATA_VERSION } from '../data/essential';
 
 export class NepaReadyDatabase extends Dexie {
   constructor() {
@@ -13,11 +16,108 @@ export class NepaReadyDatabase extends Dexie {
       personal_contacts: 'id, name',
       sync_queue: 'id, type, createdAt'
     });
+    // v2: provinces, destinations, bookmarks, recents, package registry.
+    // Adds tables only — v1 data is preserved (no deletes in upgrade).
+    this.version(2).stores({
+      locations: 'id, category_id, region, verification_status, name_en',
+      emergency_services: 'id, priority, category',
+      guides: 'id, slug, category_id',
+      transport_routes: 'id, region, route_number',
+      offline_packs: 'id, region, status, version',
+      saved_places: 'id, label',
+      personal_contacts: 'id, name',
+      sync_queue: 'id, type, createdAt',
+      provinces: 'id',
+      destinations: 'id, category, province',
+      bookmarks: 'id, kind, createdAt',
+      recents: 'id, viewedAt',
+      packages: 'id, scope, status'
+    });
   }
 }
 
 export const db = new NepaReadyDatabase();
 
+/**
+ * Seeds the essential bundled dataset into IndexedDB on first launch.
+ * Idempotent: re-running only fills tables that are still empty, and stamps
+ * the data version so future migrations can detect stale seeds.
+ */
+export async function seedEssential() {
+  const meta = await db.table('packages').get('essential-core').catch(() => null);
+  if (meta && meta.version === DATA_VERSION) {
+    const n = await db.table('destinations').count().catch(() => 1);
+    if (n > 0) return { fresh: false, version: DATA_VERSION };
+  }
+  await db.transaction('rw', [
+    db.table('provinces'), db.table('destinations'),
+    db.table('emergency_services'), db.table('packages')
+  ], async () => {
+    if ((await db.table('provinces').count()) === 0) {
+      await db.table('provinces').bulkPut(PROVINCES.map((p) => ({ ...p })));
+    }
+    if ((await db.table('destinations').count()) === 0) {
+      await db.table('destinations').bulkPut(DESTINATIONS.map((d) => ({ ...d })));
+    }
+    if ((await db.table('emergency_services').count()) === 0) {
+      await db.table('emergency_services').bulkPut(
+        EMERGENCY_NUMBERS.map((e, i) => ({
+          id: e.id, number: e.number, name_en: e.name_en, name_ne: e.name_ne,
+          category: 'emergency', priority: i + 1, scope: e.scope, official: true,
+          verification_status: 'verified_official', last_verified: '2026-10-11'
+        }))
+      );
+    }
+    await db.table('packages').put({
+      id: 'essential-core', scope: 'bundled', status: 'complete',
+      version: DATA_VERSION, name_en: 'Essential Nepal Pack (bundled)',
+      name_ne: 'आधारभूत नेपाल प्याक', downloaded_at: new Date().toISOString()
+    });
+  });
+  return { fresh: true, version: DATA_VERSION };
+}
+
+/**
+ * Bookmarks: user-saved places, stored locally only. kind is
+ * 'destination' | 'location' | 'custom'. Never synced anywhere.
+ */
+export async function toggleBookmark(item) {
+  const existing = await db.table('bookmarks').get(item.id).catch(() => null);
+  if (existing) {
+    await db.table('bookmarks').delete(item.id);
+    return false;
+  }
+  await db.table('bookmarks').put({ ...item, createdAt: Date.now() });
+  return true;
+}
+
+export async function getBookmarks() {
+  return db.table('bookmarks').orderBy('createdAt').reverse().toArray();
+}
+
+/** Recently viewed places (cap 30, newest first). Local only. */
+export async function pushRecent(item) {
+  await db.table('recents').put({ ...item, viewedAt: Date.now() });
+  const all = await db.table('recents').orderBy('viewedAt').reverse().toArray();
+  if (all.length > 30) {
+    await db.table('recents').bulkDelete(all.slice(30).map((r) => r.id));
+  }
+}
+
+export async function getRecents() {
+  return db.table('recents').orderBy('viewedAt').reverse().toArray();
+}
+
+/** Haversine straight-line distance in km. Labelled "approximate" in UI. */
+export function haversineKm(aLat, aLng, bLat, bLng) {
+  const R = 6371;
+  const dLat = ((bLat - aLat) * Math.PI) / 180;
+  const dLng = ((bLng - aLng) * Math.PI) / 180;
+  const s1 = Math.sin(dLat / 2);
+  const s2 = Math.sin(dLng / 2);
+  const a = s1 * s1 + Math.cos((aLat * Math.PI) / 180) * Math.cos((bLat * Math.PI) / 180) * s2 * s2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
 /**
  * Downloads and persists a full regional offline pack into IndexedDB
  * @param {string} packId e.g. 'biratnagar-koshi'
@@ -153,9 +253,33 @@ export async function searchOfflineData(query) {
     (r.route_number && r.route_number.toLowerCase().includes(q))
   );
 
+  // Search bundled destinations (offline-first, no network needed)
+  let matchedDestinations = [];
+  let matchedProvinces = [];
+  try {
+    const allDest = await db.table('destinations').toArray();
+    matchedDestinations = allDest.filter((d) =>
+      (d.name_en && d.name_en.toLowerCase().includes(q)) ||
+      (d.name_ne && d.name_ne.includes(query.trim())) ||
+      (d.district && d.district.toLowerCase().includes(q)) ||
+      (d.category && d.category.toLowerCase().includes(q))
+    );
+    const allProv = await db.table('provinces').toArray();
+    matchedProvinces = allProv.filter((p) =>
+      (p.name_en && p.name_en.toLowerCase().includes(q)) ||
+      (p.name_ne && p.name_ne.includes(query.trim())) ||
+      (p.capital_en && p.capital_en.toLowerCase().includes(q)) ||
+      (p.districts || []).some((d) => d.toLowerCase().includes(q))
+    );
+  } catch {
+    /* v2 tables may not exist yet on old installs — search still works */
+  }
+
   return {
     locations: matchedLocations,
     guides: matchedGuides,
-    routes: matchedRoutes
+    routes: matchedRoutes,
+    destinations: matchedDestinations,
+    provinces: matchedProvinces
   };
 }

@@ -4,3 +4,4 @@ dist/
 nepready_store.json
 *.log
 .DS_Store
+tmp/

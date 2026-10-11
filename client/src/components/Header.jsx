@@ -5,7 +5,7 @@ import StatusIndicator from './StatusIndicator';
 import { useLanguage } from '../context/LanguageContext';
 import { useNetwork } from '../context/NetworkContext';
 import { useAuth } from '../context/AuthContext';
-import { AlertTriangle, Languages, Shield, Radio, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, Languages, Shield, Radio, ShieldAlert, Search, Settings } from 'lucide-react';
 
 export default function Header() {
   const { lang, setLang, t } = useLanguage();
@@ -15,13 +15,14 @@ export default function Header() {
 
   const navLinks = [
     { to: '/', label: t('nav.home') },
+    { to: '/provinces', label: t('nav.provinces') },
+    { to: '/destinations', label: t('nav.explore') },
     { to: '/map', label: t('nav.map') },
     { to: '/emergency', label: t('nav.emergency'), isEmergency: true },
     { to: '/help', label: t('nav.help') },
     { to: '/guides', label: t('nav.guides') },
     { to: '/packs', label: t('nav.packs') },
-    { to: '/transport', label: t('nav.transport') },
-    { to: '/travel', label: t('nav.travel') },
+    { to: '/bookmarks', label: t('nav.saved') },
     { to: '/profile', label: t('nav.profile') },
   ];
 
@@ -78,6 +79,24 @@ export default function Header() {
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Status Indicator (Compact) */}
             <StatusIndicator compact />
+
+            {/* Global Search */}
+            <Link
+              to="/search"
+              className="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
+              title="Search / खोज्नुहोस्"
+            >
+              <Search className="w-4 h-4" />
+            </Link>
+
+            {/* Settings */}
+            <Link
+              to="/settings"
+              className="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
+              title="Settings / सेटिङ"
+            >
+              <Settings className="w-4 h-4" />
+            </Link>
 
             {/* Language Switcher */}
             <button

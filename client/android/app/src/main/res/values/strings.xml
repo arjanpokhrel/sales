@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">NepaReady</string>
+    <string name="title_activity_main">NepaReady</string>
+    <string name="package_name">np.nepaready.app</string>
+    <string name="custom_url_scheme">np.nepaready.app</string>
+</resources>

@@ -1,7 +1,7 @@
 {
   "name": "nepready",
   "version": "1.0.0",
-  "description": "NepaReady — Your Nepal. Always Ready. Offline-first Nepal emergency, navigation and utility platform.",
+  "description": "NepaReady \u2014 Your Nepal. Always Ready. Offline-first Nepal emergency, navigation and utility platform.",
   "private": true,
   "workspaces": [
     "server",
@@ -13,7 +13,8 @@
     "start": "npm run start --workspace=server",
     "build": "npm run build --workspace=client",
     "seed": "npm run seed --workspace=server",
-    "test": "node --test tests/nepready.test.js"
+    "test": "node --test tests/nepready.test.js tests/nepready-regions.test.js",
+    "sync:regions": "node scripts/sync-regions.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

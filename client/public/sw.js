@@ -1,11 +1,12 @@
 // NepaReady Offline Service Worker
-const CACHE_NAME = 'nepready-v1.0';
+const CACHE_NAME = 'nepready-v2.0';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/offline.html',
   '/logo.svg',
-  '/manifest.webmanifest'
+  '/manifest.webmanifest',
+  '/photos/attribution.json'
 ];
 
 self.addEventListener('install', (event) => {

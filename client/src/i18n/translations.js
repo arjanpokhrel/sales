@@ -30,7 +30,11 @@ export const translations = {
       transport: 'Transport',
       travel: 'Travel Mode',
       profile: 'Profile',
-      admin: 'Admin'
+      admin: 'Admin',
+      explore: 'Explore',
+      saved: 'Saved',
+      settings: 'Settings',
+      provinces: 'Provinces'
     },
     emergency: {
       title: 'EMERGENCY',
@@ -170,7 +174,11 @@ export const translations = {
       transport: 'यातायात',
       travel: 'यात्रा मोड',
       profile: 'प्रोफाइल',
-      admin: 'प्रशासन'
+      admin: 'प्रशासन',
+      explore: 'घुमफिर',
+      saved: 'सुरक्षित',
+      settings: 'सेटिङ',
+      provinces: 'प्रदेश'
     },
     emergency: {
       title: 'आपतकालीन सेवा',
