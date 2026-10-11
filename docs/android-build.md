@@ -1,9 +1,10 @@
 # Android build — NepaReady (`np.nepaready.app`)
 
 Status: **Android Studio project scaffolded and synced** (`client/android/`).
-No APK has been produced in this environment (no Android SDK here), so no
-APK file is claimed or shipped. Follow the steps below on any machine with
-Android Studio to produce one.
+✅ Debug APK built & installed 2026-10-11: `client/android/app/build/outputs/apk/debug/app-debug.apk`
+(11 MB) — assembled here with JDK 21 + SDK 36, installed on a Realme RMX3997
+via `adb install`, launch verified (`mCurrentFocus=np.nepaready.app/.MainActivity`).
+Build toolchain used: AGP 8.13.0, Gradle 8.14.3, `ANDROID_HOME=$HOME/android-sdk`.
 
 ## 1. Requirements
 
