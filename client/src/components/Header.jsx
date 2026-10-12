@@ -5,12 +5,14 @@ import StatusIndicator from './StatusIndicator';
 import { useLanguage } from '../context/LanguageContext';
 import { useNetwork } from '../context/NetworkContext';
 import { useAuth } from '../context/AuthContext';
-import { AlertTriangle, Languages, Shield, Radio, ShieldAlert, Search, Settings } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+import { AlertTriangle, Languages, Shield, Radio, ShieldAlert, Search, Settings, Sun, Moon } from 'lucide-react';
 
 export default function Header() {
   const { lang, setLang, t } = useLanguage();
   const { simulateOffline, toggleSimulateOffline } = useNetwork();
   const { user, isAdmin } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const location = useLocation();
 
   const navLinks = [
@@ -101,6 +103,16 @@ export default function Header() {
             >
               <Settings className="w-4 h-4" />
             </Link>
+
+            {/* Theme Toggle (Light / Dark) */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
+              title={isDark ? (lang === 'ne' ? 'उज्यालो मोड (Light Mode)' : 'Switch to Light Mode') : (lang === 'ne' ? 'अध्यारो मोड (Dark Mode)' : 'Switch to Dark Mode')}
+              aria-label="Toggle theme"
+            >
+              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-sky-400" />}
+            </button>
 
             {/* Language Switcher */}
             <button

@@ -13,7 +13,7 @@
     "start": "npm run start --workspace=server",
     "build": "npm run export:bundle && npm run build --workspace=client",
     "seed": "npm run seed --workspace=server",
-    "test": "node --test tests/nepready.test.js tests/nepready-regions.test.js",
+    "test": "node tests/run-tests.mjs",
     "sync:regions": "node scripts/sync-regions.mjs",
     "export:bundle": "node scripts/export-bundled-data.mjs"
   },

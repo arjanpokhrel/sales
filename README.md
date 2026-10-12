@@ -53,16 +53,18 @@ Most standard websites completely fail once connection drops. **NepaReady is eng
 
 | Feature | Description |
 | :--- | :--- |
+| 🗺️ **Nepal Smart Map & Live GPS** | Live interactive Leaflet map with animated GPS pulse marker, accuracy circle, recenter control, quick 13-city jumper across all provinces, and 4 tile layer options (OSM, Carto Clean, Dark Matter, OpenTopoMap). |
+| 🏛️ **Government Services Directory** | Comprehensive directory of verified Nepal institutions: Singha Durbar, Ministries, Supreme & High Courts, District Administration Offices (DAO/CDO), Metropolitans, Land Revenue (Malpot), Survey (Napi), Transport Management (DoTM Yatayat), NEA, KUKL, and NTC. |
+| 🏥 **Hospitals, Schools & Hotels** | 13 categorized facility types with color-coded markers, contact details, official websites, services tags, and one-tap phone calls. |
+| 🌙 **Light & Dark Mode** | Premium dual-theme system with smooth transitions, persisting user preference or matching OS color schemes. |
+| 🧭 **Smart Directions & Distance** | Straight-line compass bearing, travel estimates for Driving, Cycling, and Walking, plus one-tap links to online turn-by-turn routing. |
+| 📦 **10 Regional Offline Packs** | IndexedDB offline data packs covering Bagmati, Gandaki, Koshi, Lumbini, Madhesh, Karnali, and Sudurpashchim. |
+| 💾 **Offline Map Tile Caching** | Service Worker CORS tile interceptor caches OpenStreetMap and CartoDB tiles into CacheStorage for offline viewing. |
 | 🚨 **Emergency Direct Dial** | 1-tap toll-free calling to Nepal Police (`100`), Fire (`101`), Ambulance (`102`), NEOC Disaster Operations (`1155`), and Armed Police (`1114`). |
-| 🗺️ **Offline Map & Directory** | OpenStreetMap integration with offline regional boundaries, hospital markers, and straight-line compass bearing routing when disconnected. |
-| 📦 **Offline Regional Packs** | Download complete municipal packs with storage usage indicators, versioning, and download progress tracking. |
 | 🆘 **Emergency SOS Mode** | Broadcasts live GPS coordinates (Lat, Long, Accuracy, Altitude) via SMS/WhatsApp and features an offline acoustic distress siren. |
-| 🏥 **Nearby Help Finder** | Filters hospitals, pharmacies, police stations, and transit hubs sorted by real-time distance. |
 | 🧰 **Emergency Guides** | Step-by-step disaster preparedness protocols: Earthquake (*Drop, Cover, Hold On*), Snake Bite First Aid, Floods, Fires, Landslides. |
 | 🚌 **Public Transport** | Fixed routes, stops timeline, municipal fare tables, and operating hours for major cities. |
-| 🧳 **Travel Mode** | Recommends complete multi-city offline bundles prior to departure (e.g. Biratnagar to Pokhara). |
 | 🌐 **Bilingual (English & नेपाली)** | Instant language switcher throughout the entire platform. |
-| 🛠️ **Protected Admin Panel** | Manage emergency facilities, assign official verification tags, and build offline packs. |
 
 ---
 

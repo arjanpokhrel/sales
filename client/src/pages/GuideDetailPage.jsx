@@ -13,6 +13,7 @@ import {
   Clock,
   ExternalLink
 } from 'lucide-react';
+import AudioVoiceGuideButton from '../components/AudioVoiceGuideButton';
 
 export default function GuideDetailPage() {
   const { slug } = useParams();
@@ -112,9 +113,14 @@ export default function GuideDetailPage() {
           </span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">
-          {title}
-        </h1>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            {title}
+          </h1>
+          <AudioVoiceGuideButton
+            text={`${title}. ${actionSteps.map(s => `${s.step}. ${s.instruction}. ${s.detail}`).join('. ')}`}
+          />
+        </div>
 
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-400 pt-2 border-t border-slate-800">
           <span>Source: <strong>{guide.authoritative_source}</strong></span>

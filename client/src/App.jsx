@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { NetworkProvider } from './context/NetworkContext';
 import { AuthProvider } from './context/AuthContext';
@@ -36,6 +37,10 @@ import StoragePage from './pages/StoragePage';
 import AboutPage from './pages/AboutPage';
 import AttributionPage from './pages/AttributionPage';
 import HelpOfflinePage from './pages/HelpOfflinePage';
+import CitizenServicesPage from './pages/CitizenServicesPage';
+import BloodBanksPage from './pages/BloodBanksPage';
+import HighwayStatusPage from './pages/HighwayStatusPage';
+import AltitudePage from './pages/AltitudePage';
 import { seedEssential } from './offline/db';
 import { seedFromBundle } from './offline/seedFromBundle';
 import { setupNative } from './native';
@@ -67,56 +72,62 @@ export default function App() {
   }, []);
 
   return (
-    <LanguageProvider>
-      <NetworkProvider>
-        <AuthProvider>
-          <BrowserRouter>
-            <div className="min-h-screen flex flex-col bg-[#080E1A] text-slate-100 pb-[132px] lg:pb-0 font-sans">
-              <FirstRunGate />
-              <Header />
+    <ThemeProvider>
+      <LanguageProvider>
+        <NetworkProvider>
+          <AuthProvider>
+            <BrowserRouter>
+              <div className="min-h-screen flex flex-col bg-[#080E1A] text-slate-100 pb-[132px] lg:pb-0 font-sans transition-colors">
+                <FirstRunGate />
+                <Header />
 
-              <main className="flex-1 pt-7 lg:pt-0">
-                <Routes>
-                  <Route path="/welcome" element={<WelcomePage />} />
-                  {/* Map-first: the app opens on the full-screen navigator */}
-                  <Route path="/" element={<Navigate to="/map" replace />} />
-                  <Route path="/home" element={<HomePage />} />
-                  <Route path="/map" element={<MapPage />} />
-                  <Route path="/directions" element={<DirectionsPage />} />
-                  <Route path="/search" element={<SearchPage />} />
-                  <Route path="/places/:id" element={<PlaceDetailPage />} />
-                  <Route path="/provinces" element={<ProvincesPage />} />
-                  <Route path="/provinces/:id" element={<ProvinceDetailPage />} />
-                  <Route path="/destinations" element={<DestinationsPage />} />
-                  <Route path="/destinations/:id" element={<DestinationDetailPage />} />
-                  <Route path="/gallery" element={<GalleryPage />} />
-                  <Route path="/stays" element={<StaysPage />} />
-                  <Route path="/bookmarks" element={<BookmarksPage />} />
-                  <Route path="/download-all" element={<DownloadAllPage />} />
-                  <Route path="/emergency" element={<EmergencyPage />} />
-                  <Route path="/sos" element={<SOSPage />} />
-                  <Route path="/help" element={<NearbyHelpPage />} />
-                  <Route path="/guides" element={<GuidesPage />} />
-                  <Route path="/guides/:slug" element={<GuideDetailPage />} />
-                  <Route path="/packs" element={<OfflinePacksPage />} />
-                  <Route path="/transport" element={<TransportPage />} />
-                  <Route path="/travel" element={<TravelModePage />} />
-                  <Route path="/profile" element={<ProfilePage />} />
-                  <Route path="/settings" element={<SettingsPage />} />
-                  <Route path="/storage" element={<StoragePage />} />
-                  <Route path="/about" element={<AboutPage />} />
-                  <Route path="/attribution" element={<AttributionPage />} />
-                  <Route path="/help-offline" element={<HelpOfflinePage />} />
-                  <Route path="/admin" element={<AdminDashboardPage />} />
-                  <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-              </main>
+                <main className="flex-1 pt-7 lg:pt-0">
+                  <Routes>
+                    <Route path="/welcome" element={<WelcomePage />} />
+                    {/* Map-first: the app opens on the full-screen navigator */}
+                    <Route path="/" element={<Navigate to="/map" replace />} />
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/map" element={<MapPage />} />
+                    <Route path="/directions" element={<DirectionsPage />} />
+                    <Route path="/search" element={<SearchPage />} />
+                    <Route path="/places/:id" element={<PlaceDetailPage />} />
+                    <Route path="/provinces" element={<ProvincesPage />} />
+                    <Route path="/provinces/:id" element={<ProvinceDetailPage />} />
+                    <Route path="/destinations" element={<DestinationsPage />} />
+                    <Route path="/destinations/:id" element={<DestinationDetailPage />} />
+                    <Route path="/gallery" element={<GalleryPage />} />
+                    <Route path="/stays" element={<StaysPage />} />
+                    <Route path="/bookmarks" element={<BookmarksPage />} />
+                    <Route path="/download-all" element={<DownloadAllPage />} />
+                    <Route path="/emergency" element={<EmergencyPage />} />
+                    <Route path="/sos" element={<SOSPage />} />
+                    <Route path="/help" element={<NearbyHelpPage />} />
+                    <Route path="/guides" element={<GuidesPage />} />
+                    <Route path="/guides/:slug" element={<GuideDetailPage />} />
+                    <Route path="/packs" element={<OfflinePacksPage />} />
+                    <Route path="/services" element={<CitizenServicesPage />} />
+                    <Route path="/blood-banks" element={<BloodBanksPage />} />
+                    <Route path="/highways" element={<HighwayStatusPage />} />
+                    <Route path="/altitude" element={<AltitudePage />} />
+                    <Route path="/transport" element={<TransportPage />} />
+                    <Route path="/travel" element={<TravelModePage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/settings" element={<SettingsPage />} />
+                    <Route path="/storage" element={<StoragePage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/attribution" element={<AttributionPage />} />
+                    <Route path="/help-offline" element={<HelpOfflinePage />} />
+                    <Route path="/admin" element={<AdminDashboardPage />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </Routes>
+                </main>
 
-              <BottomNavigation />
-            </div>
-          </BrowserRouter>
-        </AuthProvider>
-      </NetworkProvider>
-    </LanguageProvider>
+                <BottomNavigation />
+              </div>
+            </BrowserRouter>
+          </AuthProvider>
+        </NetworkProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

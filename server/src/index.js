@@ -65,9 +65,10 @@ app.use((err, req, res, next) => {
 async function bootstrap() {
   try {
     await storage.init();
-    app.listen(config.port, () => {
-      console.log(`🇳🇵 NepaReady API server listening at http://localhost:${config.port}`);
-      console.log(`📡 Healthcheck available at http://localhost:${config.port}/api/health`);
+    const host = process.env.HOST || '127.0.0.1';
+    app.listen(config.port, host, () => {
+      console.log(`🇳🇵 NepaReady API server listening at http://${host}:${config.port}`);
+      console.log(`📡 Healthcheck available at http://${host}:${config.port}/api/health`);
     });
   } catch (err) {
     console.error('Failed to start NepaReady server:', err);

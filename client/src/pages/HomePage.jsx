@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Map, ShieldAlert, HeartPulse, BookOpen, HardDrive, PhoneCall, Radio, CheckCircle2, AlertTriangle, ArrowRight, Landmark, Mountain, DownloadCloud, Bookmark } from 'lucide-react';
+import { Map, ShieldAlert, HeartPulse, BookOpen, HardDrive, PhoneCall, Radio, CheckCircle2, AlertTriangle, ArrowRight, Landmark, Mountain, DownloadCloud, Bookmark, FileText, Droplets, Construction, Compass } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useNetwork } from '../context/NetworkContext';
 import QuickActionCard from '../components/QuickActionCard';
@@ -39,21 +39,21 @@ export default function HomePage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
       {/* 1. Header Banner & Dynamic Connection State */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-800 backdrop-blur-sm shadow-md">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 backdrop-blur-sm shadow-md">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xl">🇳🇵</span>
-            <h2 className="text-lg font-bold text-white tracking-tight">Nepal Navigator</h2>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Nepal Navigator</h2>
           </div>
-          <p className="text-xs text-slate-400 font-medium">
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
             {t('app.tagline')}
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           {connectionStatus === 'online' ? (
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-300 text-xs font-semibold">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-xs font-semibold">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
               <span>🟢 {t('status.online')}</span>
             </div>
           ) : (
@@ -120,8 +120,8 @@ export default function HomePage() {
       {/* 3. Four Quick Action Cards */}
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-extrabold text-white tracking-tight">Quick Access</h2>
-          <span className="text-xs text-slate-400">Essential Offline Utilities</span>
+          <h2 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">Quick Access</h2>
+          <span className="text-xs text-slate-500 dark:text-slate-400">Essential Offline Utilities</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -159,10 +159,10 @@ export default function HomePage() {
       {/* 3b. Explore Nepal — provinces, destinations, downloads, saved */}
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-extrabold text-white tracking-tight">
+          <h2 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {lang === 'ne' ? 'नेपाल घुम्नुहोस्' : 'Explore Nepal'}
           </h2>
-          <span className="text-xs text-slate-400">{lang === 'ne' ? 'अफलाइन उपलब्ध' : 'Available offline'}</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400">{lang === 'ne' ? 'अफलाइन उपलब्ध' : 'Available offline'}</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -193,6 +193,47 @@ export default function HomePage() {
             description={lang === 'ne' ? 'सुरक्षित ठाउँहरू।' : 'Your saved places.'}
             icon={Bookmark}
             color="red"
+          />
+        </div>
+      </section>
+
+      {/* 3c. Public Services & Emergency Utilities */}
+      <section>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            {lang === 'ne' ? 'नागरिक सेवा तथा आवश्यक औजार' : 'Citizen & Travel Utilities'}
+          </h2>
+          <span className="text-xs text-slate-500 dark:text-slate-400">{lang === 'ne' ? '१००% अफलाइन सुरक्षित' : '100% Offline Capable'}</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <QuickActionCard
+            to="/services"
+            title={lang === 'ne' ? 'नागरिक कागजात' : 'Citizen Checklist'}
+            description={lang === 'ne' ? 'लाइसेन्स, राहदानी, राष्ट्रिय परिचयपत्र चेकलिस्ट।' : 'License, ePassport, NID document checklists.'}
+            icon={FileText}
+            color="blue"
+          />
+          <QuickActionCard
+            to="/blood-banks"
+            title={lang === 'ne' ? 'रक्त बैंक' : 'Blood Banks'}
+            description={lang === 'ne' ? '२४/७ आपतकालीन रक्त सञ्चार केन्द्रहरू।' : '24/7 Red Cross & emergency blood units.'}
+            icon={Droplets}
+            color="red"
+          />
+          <QuickActionCard
+            to="/highways"
+            title={lang === 'ne' ? 'राजमार्ग तथा पहिरो' : 'Highway Status'}
+            description={lang === 'ne' ? 'मुग्लिन, पृथ्वी, बिपी लगायत प्रमुख सडक स्थिति।' : 'Prithvi, BP & major highway roadblock monitor.'}
+            icon={Construction}
+            color="amber"
+          />
+          <QuickActionCard
+            to="/altitude"
+            title={lang === 'ne' ? 'उचाइ तथा लेक लाग्ने' : 'Altitude Meter'}
+            description={lang === 'ne' ? 'GPS उचाइ मिटर र लेक लाग्ने (AMS) सुरक्षा।' : 'Live elevation meter & AMS prevention guide.'}
+            icon={Compass}
+            color="emerald"
           />
         </div>
       </section>
@@ -264,15 +305,15 @@ export default function HomePage() {
       </section>
 
       {/* 5. Offline Packs Summary Card */}
-      <section className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-md">
+      <section className="p-6 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-md">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-lg font-bold text-white tracking-tight">Your Offline Packs</h2>
-            <p className="text-xs text-slate-400">Stored on your device for disconnected access</p>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Your Offline Packs</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Stored on your device for disconnected access</p>
           </div>
           <Link
             to="/packs"
-            className="text-xs font-bold text-sky-400 hover:text-sky-300 flex items-center gap-1"
+            className="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1"
           >
             <span>Manage Packs</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -284,20 +325,20 @@ export default function HomePage() {
             {downloadedPacks.map((pack) => (
               <div
                 key={pack.id}
-                className="flex items-center justify-between p-3 rounded-xl bg-emerald-950/30 border border-emerald-800/80"
+                className="flex items-center justify-between p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-300 dark:border-emerald-800/80"
               >
                 <div>
-                  <div className="text-sm font-bold text-white flex items-center gap-1.5">
+                  <div className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                     <span>{pack.name_en}</span>
-                    <span className="text-emerald-400 text-xs">✓ Downloaded</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 text-xs">✓ Downloaded</span>
                   </div>
-                  <div className="text-[11px] text-slate-400">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400">
                     {pack.region} • {pack.size_mb} MB
                   </div>
                 </div>
                 <Link
                   to="/map"
-                  className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200"
+                  className="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200"
                 >
                   View
                 </Link>
@@ -305,14 +346,14 @@ export default function HomePage() {
             ))}
           </div>
         ) : (
-          <div className="p-6 text-center border border-dashed border-slate-800 rounded-xl">
-            <HardDrive className="w-8 h-8 text-slate-600 mx-auto mb-2" />
-            <p className="text-sm text-slate-400 mb-3">
+          <div className="p-6 text-center border border-dashed border-slate-200 dark:border-slate-800 rounded-xl">
+            <HardDrive className="w-8 h-8 text-slate-400 dark:text-slate-600 mx-auto mb-2" />
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-3">
               You haven't downloaded an Offline Pack yet.
             </p>
             <Link
               to="/packs"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold transition"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold transition shadow-md shadow-red-900/20"
             >
               <span>Explore Offline Packs</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -322,8 +363,8 @@ export default function HomePage() {
       </section>
 
       {/* Footer Tagline */}
-      <footer className="text-center py-6 text-xs text-slate-500 border-t border-slate-900">
-        <p className="font-semibold text-slate-400 mb-1">
+      <footer className="text-center py-6 text-xs text-slate-400 dark:text-slate-500 border-t border-slate-200 dark:border-slate-800">
+        <p className="font-semibold text-slate-600 dark:text-slate-400 mb-1">
           Stay Prepared. Stay Connected. Even When You're Offline.
         </p>
         <p>Nepal Navigator 🇳🇵 • Authoritative Disaster & Emergency Directory for Nepal</p>

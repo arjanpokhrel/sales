@@ -82,30 +82,42 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets (CSS, JS, SVG, Images, Leaflet tiles): Stale-While-Revalidate / Cache-first
+  // Static assets & Leaflet map tiles: Cache-first / Stale-While-Revalidate
+  const isMapTile = url.hostname.includes('tile.openstreetmap.org') ||
+                    url.hostname.includes('tile.openstreetmap.fr') ||
+                    url.hostname.includes('arcgisonline.com') ||
+                    url.hostname.includes('opentopomap.org');
+
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       if (cachedResponse) {
-        // Fetch in background to revalidate
-        fetch(request)
-          .then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
-            }
-          })
-          .catch(() => {});
+        // Revalidate in background if online (polite debounce)
+        if (navigator.onLine && !isMapTile) {
+          fetch(request)
+            .then((networkResponse) => {
+              if (networkResponse && networkResponse.status === 200) {
+                caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse));
+              }
+            })
+            .catch(() => {});
+        }
         return cachedResponse;
       }
 
       return fetch(request)
         .then((networkResponse) => {
-          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          if (!networkResponse || networkResponse.status !== 200) {
             return networkResponse;
           }
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseToCache);
-          });
+
+          // Cache basic assets and CORS map tiles
+          const canCache = networkResponse.type === 'basic' || (isMapTile && networkResponse.type === 'cors');
+          if (canCache) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseToCache);
+            });
+          }
           return networkResponse;
         })
         .catch(() => {

@@ -8,16 +8,19 @@ const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
 
 // category_id -> Overpass amenity tags
 export const LIVE_AMENITIES = {
+  government: ['townhall', 'courthouse', 'community_centre'],
   hospital: ['hospital', 'clinic', 'doctors'],
   police: ['police'],
   fire: ['fire_station'],
   pharmacy: ['pharmacy'],
-  atm: ['atm'],
-  transport: ['bus_station'],
+  atm: ['atm', 'bank'],
+  transport: ['bus_station', 'aerodrome'],
   school: ['school', 'college', 'university'],
-  fuel: ['fuel'],
-  restaurant: ['restaurant', 'cafe', 'fast_food'],
   hotel: ['hotel', 'guest_house', 'hostel', 'lodging'],
+  utility: ['post_office'],
+  daily: ['fuel', 'supermarket', 'convenience', 'restaurant'],
+  tourism: ['place_of_worship', 'viewpoint', 'attraction', 'museum'],
+  disaster: ['shelter']
 };
 
 const cache = new Map(); // "amenity|lat,rounded|lng,rounded" -> { at, items }
@@ -98,5 +101,19 @@ export async function fetchLivePlaces(categoryId, lat, lng, radiusM = 12000) {
 }
 
 function categoryLabel(c) {
-  return { hospital: 'Hospital', police: 'Police', fire: 'Fire station', pharmacy: 'Pharmacy', atm: 'ATM', transport: 'Bus station', school: 'School', fuel: 'Fuel station', restaurant: 'Restaurant', hotel: 'Hotel' }[c] || 'Place';
+  return {
+    government: 'Government Office',
+    hospital: 'Hospital',
+    police: 'Police Station',
+    fire: 'Fire Station',
+    pharmacy: 'Pharmacy',
+    atm: 'Bank / ATM',
+    transport: 'Bus / Airport',
+    school: 'School / University',
+    hotel: 'Hotel',
+    utility: 'Public Utility',
+    daily: 'Daily Needs / Fuel',
+    tourism: 'Heritage Site',
+    disaster: 'Emergency Shelter'
+  }[c] || 'Place';
 }

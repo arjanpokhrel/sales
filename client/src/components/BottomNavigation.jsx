@@ -2,9 +2,10 @@ import React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useNetwork } from '../context/NetworkContext';
+import { useTheme } from '../context/ThemeContext';
 import {
   Compass, Bookmark, Route as RouteIcon, MapPin, MoreHorizontal,
-  Search, Languages, ShieldAlert, Radio
+  Search, Languages, ShieldAlert, Radio, Sun, Moon
 } from 'lucide-react';
 
 // Map-first bottom command bar: Explore (map), Saved, Directions, Nearby,
@@ -13,6 +14,7 @@ export default function BottomNavigation() {
   const { lang, setLang, t } = useLanguage();
   const location = useLocation();
   const { isOnline, simulateOffline, toggleSimulateOffline } = useNetwork();
+  const { isDark, toggleTheme } = useTheme();
 
   const items = [
     { to: '/map', label: lang === 'ne' ? 'घुम्नुहोस्' : 'Explore', icon: Compass },
@@ -54,6 +56,15 @@ export default function BottomNavigation() {
             <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-emerald-400' : 'bg-red-500'}`} />
             {isOnline ? (lang === 'ne' ? 'अनलाइन' : 'Online') : (lang === 'ne' ? 'अफलाइन' : 'Offline')}
           </div>
+
+          <button
+            onClick={toggleTheme}
+            className="flex items-center justify-center p-2 rounded-xl bg-slate-800/80 text-slate-200 text-xs border border-slate-700"
+            title="Toggle Light / Dark mode"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-sky-400" />}
+          </button>
 
           <button
             onClick={() => setLang(lang === 'en' ? 'ne' : 'en')}

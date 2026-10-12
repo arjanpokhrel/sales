@@ -36,6 +36,12 @@
     font-family: 'Inter', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-tap-highlight-color: transparent;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  html.light body {
+    background-color: #F8FAFC;
+    color: #0F172A;
   }
 }
 
@@ -101,17 +107,29 @@ main img {
   background: #0B192C !important;
   font-family: inherit;
 }
+html.light .leaflet-container {
+  background: #E2E8F0 !important;
+}
 
 .leaflet-popup-content-wrapper {
   background: #1E293B !important;
   color: #F8FAFC !important;
-  border-radius: 12px !important;
+  border-radius: 14px !important;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
   border: 1px solid #334155 !important;
+}
+html.light .leaflet-popup-content-wrapper {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid #E2E8F0 !important;
 }
 
 .leaflet-popup-tip {
   background: #1E293B !important;
+}
+html.light .leaflet-popup-tip {
+  background: #FFFFFF !important;
 }
 
 /* Pulse animation for SOS and Emergency states */

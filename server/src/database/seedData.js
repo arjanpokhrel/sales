@@ -1,16 +1,19 @@
-// NepaReady Authoritative Nepal Emergency and Reference Seed Data
-// Note: In development/demo, all records are clearly tagged. Real emergency dial numbers
-// (100, 101, 102, 1155, 1114) are verified national toll-free lines in Nepal.
+import { nepalGovernmentAndPlaces } from '../data/nepalGovernmentAndPlaces.js';
 
 export const locationCategories = [
-  { id: 'hospital', name_en: 'Hospitals & Trauma', name_ne: 'अस्पताल तथा आपतकालीन', icon: 'HeartPulse', color: 'red', priority: 1 },
+  { id: 'hospital', name_en: 'Hospitals & Healthcare', name_ne: 'अस्पताल तथा स्वास्थ्य सेवा', icon: 'HeartPulse', color: 'red', priority: 1 },
   { id: 'police', name_en: 'Police Stations', name_ne: 'प्रहरी कार्यालय', icon: 'ShieldAlert', color: 'blue', priority: 2 },
   { id: 'fire', name_en: 'Fire Stations', name_ne: 'दमकल कार्यालय', icon: 'Flame', color: 'orange', priority: 3 },
   { id: 'pharmacy', name_en: '24/7 Pharmacies', name_ne: 'औषधि पसल', icon: 'Pill', color: 'emerald', priority: 4 },
   { id: 'disaster', name_en: 'Disaster Shelters', name_ne: 'विपद् राहत तथा आश्रय', icon: 'Tent', color: 'amber', priority: 5 },
-  { id: 'atm', name_en: 'ATMs & Cash', name_ne: 'एटीएम तथा बैंक', icon: 'CreditCard', color: 'sky', priority: 6 },
+  { id: 'atm', name_en: 'ATMs & Banks', name_ne: 'एटीएम तथा बैंक', icon: 'CreditCard', color: 'sky', priority: 6 },
   { id: 'transport', name_en: 'Bus Terminals & Transit', name_ne: 'बसपार्क तथा यातायात', icon: 'Bus', color: 'violet', priority: 7 },
-  { id: 'government', name_en: 'Government Offices', name_ne: 'सरकारी तथा प्रशासनिक निकाय', icon: 'Landmark', color: 'slate', priority: 8 }
+  { id: 'government', name_en: 'Government Offices', name_ne: 'सरकारी तथा प्रशासनिक निकाय', icon: 'Landmark', color: 'slate', priority: 8 },
+  { id: 'school', name_en: 'Schools & Universities', name_ne: 'शैक्षिक संस्था तथा विश्वविद्यालय', icon: 'GraduationCap', color: 'teal', priority: 9 },
+  { id: 'hotel', name_en: 'Hotels & Lodges', name_ne: 'होटल तथा बसोबास', icon: 'Hotel', color: 'indigo', priority: 10 },
+  { id: 'utility', name_en: 'Public Utilities (NEA/Water/NTC)', name_ne: 'विद्युत/खानेपानी/सञ्चार सेवा', icon: 'Zap', color: 'yellow', priority: 11 },
+  { id: 'daily', name_en: 'Daily Needs & Fuel', name_ne: 'दैनिक आवश्यकता तथा इन्धन', icon: 'Fuel', color: 'rose', priority: 12 },
+  { id: 'tourism', name_en: 'Heritage & Attractions', name_ne: 'धार्मिक तथा पर्यटकीय सम्पदा', icon: 'Compass', color: 'amber', priority: 13 }
 ];
 
 export const emergencyServices = [
@@ -213,6 +216,91 @@ export const offlinePacks = [
     bounding_box: [28.1600, 83.9200, 28.2600, 84.0500],
     is_active: true,
     last_updated: '2026-09-25'
+  },
+  {
+    id: 'chitwan-bagmati',
+    name_en: 'Chitwan & Bharatpur',
+    name_ne: 'चितवन तथा भरतपुर',
+    province: 'Bagmati Province',
+    region: 'Bharatpur',
+    size_mb: 45.0,
+    version: 'v1.1',
+    description_en: 'Medical hub directory, Bharatpur Hospital, Chitwan National Park tourist emergency contacts, and highway corridors.',
+    description_ne: 'भरतपुर अस्पताल, चितवन मेडिकल कलेज तथा राजमार्ग सुरक्षा निर्देशिका।',
+    center_latitude: 27.6830,
+    center_longitude: 84.4350,
+    zoom_level: 13,
+    bounding_box: [27.6200, 84.3800, 27.7500, 84.5000],
+    is_active: true,
+    last_updated: '2026-10-10'
+  },
+  {
+    id: 'lumbini-rupandehi',
+    name_en: 'Lumbini & Butwal',
+    name_ne: 'लुम्बिनी तथा बुटवल',
+    province: 'Lumbini Province',
+    region: 'Butwal',
+    size_mb: 46.5,
+    version: 'v1.1',
+    description_en: 'Lumbini sacred heritage zone, Gautam Buddha Airport, Butwal trade hub, and highway emergency response.',
+    description_ne: 'लुम्बिनी विश्व सम्पदा क्षेत्र, बुटवल उपमहानगर र भैरहवा क्षेत्रको अफलाइन नक्सा।',
+    center_latitude: 27.7010,
+    center_longitude: 83.4650,
+    zoom_level: 13,
+    bounding_box: [27.4500, 83.2500, 27.7500, 83.5200],
+    is_active: true,
+    last_updated: '2026-10-10'
+  },
+  {
+    id: 'janakpur-madhesh',
+    name_en: 'Janakpurdham',
+    name_ne: 'जनकपुरधाम',
+    province: 'Madhesh Province',
+    region: 'Janakpur',
+    size_mb: 38.0,
+    version: 'v1.0',
+    description_en: 'Janakpurdham cultural city, Janaki Mandir, Provincial Hospital, and Madhesh administrative directory.',
+    description_ne: 'जनकपुरधाम उपमहानगर, जानकी मन्दिर तथा मधेश प्रदेश आपतकालीन निर्देशिका।',
+    center_latitude: 26.7300,
+    center_longitude: 85.9265,
+    zoom_level: 13,
+    bounding_box: [26.6800, 85.8800, 26.7800, 85.9800],
+    is_active: true,
+    last_updated: '2026-10-10'
+  },
+  {
+    id: 'nepalgunj-banke',
+    name_en: 'Nepalgunj & Banke',
+    name_ne: 'नेपालगन्ज तथा बाँके',
+    province: 'Lumbini Province',
+    region: 'Nepalgunj',
+    size_mb: 40.0,
+    version: 'v1.0',
+    description_en: 'Mid-western border transit hub, Bheri Referral Hospital, Kohalpur junction, and disaster relief packs.',
+    description_ne: 'नेपालगन्ज उपमहानगर, भेरी अस्पताल र कोहलपुर चोकको अफलाइन नक्सा।',
+    center_latitude: 28.0530,
+    center_longitude: 81.6180,
+    zoom_level: 13,
+    bounding_box: [28.0000, 81.5600, 28.1200, 81.6800],
+    is_active: true,
+    last_updated: '2026-10-10'
+  },
+  {
+    id: 'dhangadhi-kailali',
+    name_en: 'Dhangadhi & Kailali',
+    name_ne: 'धनगढी तथा कैलाली',
+    province: 'Sudurpashchim Province',
+    region: 'Dhangadhi',
+    size_mb: 41.0,
+    version: 'v1.0',
+    description_en: 'Sudurpashchim provincial capital pack, Seti Provincial Hospital, airport, and border checkpoint directory.',
+    description_ne: 'सुदूरपश्चिम प्रदेशको राजधानी धनगढी, सेती प्रादेशिक अस्पताल र सीमा सुरक्षा निर्देशिका।',
+    center_latitude: 28.6920,
+    center_longitude: 80.5910,
+    zoom_level: 13,
+    bounding_box: [28.6400, 80.5300, 28.7600, 80.6500],
+    is_active: true,
+    last_updated: '2026-10-10'
   }
 ];
 
@@ -846,7 +934,8 @@ export const locations = [
     region: 'Dhangadhi', district: 'Kailali',
     verification_status: 'approximate', verified_at: '2026-10-11',
     source: 'Public knowledge — needs field verification'
-  }
+  },
+  ...nepalGovernmentAndPlaces
 ];
 
 export const guides = [

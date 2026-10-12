@@ -33,6 +33,24 @@ export class NepaReadyDatabase extends Dexie {
       recents: 'id, viewedAt',
       packages: 'id, scope, status'
     });
+
+    // v3: custom offline dropped pins & field notes
+    this.version(3).stores({
+      locations: 'id, category_id, region, verification_status, name_en',
+      emergency_services: 'id, priority, category',
+      guides: 'id, slug, category_id',
+      transport_routes: 'id, region, route_number',
+      offline_packs: 'id, region, status, version',
+      saved_places: 'id, label',
+      personal_contacts: 'id, name',
+      sync_queue: 'id, type, createdAt',
+      provinces: 'id',
+      destinations: 'id, category, province',
+      bookmarks: 'id, kind, createdAt',
+      recents: 'id, viewedAt',
+      packages: 'id, scope, status',
+      custom_pins: 'id, createdAt'
+    });
   }
 }
 
@@ -283,3 +301,35 @@ export async function searchOfflineData(query) {
     provinces: matchedProvinces
   };
 }
+
+export async function saveCustomPin(pin) {
+  const item = {
+    id: pin.id || `pin_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+    title: pin.title || 'My Pin',
+    note: pin.note || '',
+    latitude: Number(pin.latitude),
+    longitude: Number(pin.longitude),
+    color: pin.color || '#F59E0B',
+    createdAt: Date.now()
+  };
+  await db.table('custom_pins').put(item);
+  return item;
+}
+
+export async function getCustomPins() {
+  try {
+    return await db.table('custom_pins').toArray();
+  } catch {
+    return [];
+  }
+}
+
+export async function deleteCustomPin(id) {
+  try {
+    await db.table('custom_pins').delete(id);
+    return true;
+  } catch {
+    return false;
+  }
+}
+

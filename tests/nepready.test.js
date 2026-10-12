@@ -1,7 +1,7 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert';
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 
 describe('🇳🇵 NepaReady Full-Stack Verification Suite', () => {
 
