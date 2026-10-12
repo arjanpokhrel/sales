@@ -38,11 +38,11 @@ Nothing below is estimated: every number was read from the built artifacts.
 4. **2 destinations (Pathibhara, Gosaikunda)** ship without photos — they show
    an explicit image-unavailable state, not a placeholder.
 5. **District Nepali names** omitted (null) pending verification.
-6. **APK artifact** — ✅ BUILT & VERIFIED 2026-10-11: `client/android/app/build/outputs/apk/debug/app-debug.apk`
-   (11 MB, debug-signed) assembled with AGP 8.13 / Gradle 8.14.3 / JDK 21 / SDK 36.
-   Installed via `adb install` on a Realme RMX3997 and launched — `mCurrentFocus`
-   confirmed `np.nepaready.app/.MainActivity`. Copy for phone download:
-   `client/dist/apk/nepaready-debug.apk` (git-ignored build output).
+6. **APK artifact** — ✅ BUILT & VERIFIED 2026-10-12: `client/android/app/build/outputs/apk/debug/app-debug.apk`
+   (18 MB, debug-signed) with bottom command bar, summit logo/icons/splash,
+   bundled in-app directory (37 places + guides + routes, no server needed).
+   Reinstalled via `adb install -r` on Realme RMX3997, force-stopped, relaunched —
+   `mCurrentFocus=np.nepaready.app/.MainActivity`, `lastUpdateTime=2026-10-12 09:15`.
 7. **No public web URL** — deployment not performed; no URL claimed
    (see `docs/deployment.md`).
 
