@@ -184,7 +184,7 @@ export default function AdminDashboardPage() {
             <span>AUTHORITATIVE VERIFICATION CONSOLE</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-            NepaReady Admin Dashboard
+            Nepal Navigator Admin
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
             Logged in as {user.name} ({user.email})

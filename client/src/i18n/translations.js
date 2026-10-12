@@ -1,7 +1,7 @@
 export const translations = {
   en: {
     app: {
-      name: 'NepaReady',
+      name: 'Nepal Navigator',
       tagline: 'Your Nepal. Always Ready.',
       stayReady: 'Stay Ready. Even Offline.',
       heroSubtitle: 'Access essential emergency information, maps and local services even when your connection is unavailable.',
@@ -145,7 +145,7 @@ export const translations = {
 
   ne: {
     app: {
-      name: 'नेपारेडी',
+      name: 'नेपाल नेभिगेटर',
       tagline: 'तपाईँको नेपाल। सधैँ तत्पर।',
       stayReady: 'सधैँ तत्पर। अफलाइनमा पनि।',
       heroSubtitle: 'इन्टरनेट नभएको अवस्थामा पनि आवश्यक आपतकालीन सूचना, नक्सा र स्थानीय सेवाहरू तत्काल प्राप्त गर्नुहोस्।',

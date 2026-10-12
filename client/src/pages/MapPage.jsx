@@ -55,7 +55,11 @@ const categoryIcons = {
   disaster: { color: '#D97706', emoji: '⛑️' },
   atm: { color: '#0284C7', emoji: '🏧' },
   transport: { color: '#7C3AED', emoji: '🚌' },
-  government: { color: '#475569', emoji: '🏛️' }
+  government: { color: '#475569', emoji: '🏛️' },
+  school: { color: '#0D9488', emoji: '🏫' },
+  fuel: { color: '#EAB308', emoji: '⛽' },
+  restaurant: { color: '#EC4899', emoji: '🍽️' },
+  hotel: { color: '#6366F1', emoji: '🛏️' }
 };
 
 // Map controller: follows the live GPS dot (pan, keeps zoom) until the

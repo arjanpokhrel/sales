@@ -1,4 +1,10 @@
-# Android build — NepaReady (`np.nepaready.app`)
+# Android build — Nepal Navigator
+
+> Brand: **Nepal Navigator** (launcher label, app name). Package ID stays
+> **`np.nepaready.app`** and the on-device database/keys are unchanged, so
+> existing installs update without losing bookmarks or downloads.
+
+Status: see `docs/DATA_COMPLETENESS.md` §6 for the latest verified artifact. (`np.nepaready.app`)
 
 Status: **Android Studio project scaffolded and synced** (`client/android/`).
 ✅ Debug APK built & installed 2026-10-11: `client/android/app/build/outputs/apk/debug/app-debug.apk`
@@ -32,20 +38,28 @@ cd client/android
 Install it on a phone with `adb install app-debug.apk`, or copy the file to
 the phone and open it (see §5 Unknown sources).
 
-## 4. Release APK / AAB (for distribution / Play)
+## 4. Release APK (signed, for distribution)
 
-1. Create a keystore once (keep the passwords safe — losing them bricks updates):
-   ```bash
-   keytool -genkeypair -v -keystore nepready-release.jks -alias nepready \
-     -keyalg RSA -keysize 2048 -validity 10000
-   ```
-2. Add signing config to `client/android/app/build.gradle` (or via
-   `gradle.properties`, never commit the passwords).
-3. Build:
-   ```bash
-   ./gradlew assembleRelease        # APK
-   ./gradlew bundleRelease          # AAB (Play Store)
-   ```
+The keystore lives **outside the repo** (`~/nepnav-release.jks`) and is never
+committed. Signing is wired through environment variables only:
+
+```bash
+export NEPNAV_KEYSTORE=$HOME/nepnav-release.jks NEPNAV_KEYALIAS=nepnav
+export NEPNAV_STOREPASS=$(cat $HOME/nepnav-keystore.pass)
+export NEPNAV_KEYPASS=$(cat $HOME/nepnav-keystore.pass)
+./gradlew assembleRelease
+# Output: client/android/app/build/outputs/apk/release/app-release.apk
+# Verify:  apksigner verify --print-certs app-release.apk
+```
+
+Without those variables `assembleRelease` still runs but produces an
+unsigned APK. To recreate the keystore (do this once, back it up — losing it
+bricks future updates):
+
+```bash
+keytool -genkeypair -keystore ~/nepnav-release.jks -alias nepnav \
+  -keyalg RSA -keysize 2048 -validity 10000
+```
 
 ## 5. Installing without the Play Store (sideloading)
 

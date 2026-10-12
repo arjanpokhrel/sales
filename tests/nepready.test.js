@@ -172,7 +172,7 @@ describe('🇳🇵 NepaReady Full-Stack Verification Suite', () => {
     const manifestRes = await fetch(`${BASE_URL}/manifest.webmanifest`);
     assert.strictEqual(manifestRes.status, 200);
     const manifest = await manifestRes.json();
-    assert.strictEqual(manifest.short_name, 'NepaReady');
+    assert.strictEqual(manifest.short_name, 'Nepal Navigator');
     assert.strictEqual(manifest.display, 'standalone');
 
     const offlineRes = await fetch(`${BASE_URL}/offline.html`);

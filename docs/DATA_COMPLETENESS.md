@@ -1,4 +1,4 @@
-# Data completeness report — NepaReady v2.0 (2026-10-11)
+# Data completeness report — Nepal Navigator (2026-10-11)
 
 Generated from the live `/api/packages/manifest` endpoint and the repo.
 Nothing below is estimated: every number was read from the built artifacts.
@@ -38,11 +38,17 @@ Nothing below is estimated: every number was read from the built artifacts.
 4. **2 destinations (Pathibhara, Gosaikunda)** ship without photos — they show
    an explicit image-unavailable state, not a placeholder.
 5. **District Nepali names** omitted (null) pending verification.
-6. **APK artifact** — ✅ BUILT & VERIFIED 2026-10-12: `client/android/app/build/outputs/apk/debug/app-debug.apk`
-   (18 MB, debug-signed) with bottom command bar, summit logo/icons/splash,
-   bundled in-app directory (37 places + guides + routes, no server needed).
-   Reinstalled via `adb install -r` on Realme RMX3997, force-stopped, relaunched —
-   `mCurrentFocus=np.nepaready.app/.MainActivity`, `lastUpdateTime=2026-10-12 09:15`.
+6. **APK artifacts** — ✅ VERIFIED 2026-10-12 (Nepal Navigator brand):
+   - Debug: `client/android/app/build/outputs/apk/debug/app-debug.apk` (18 MB).
+     Reinstalled via `adb install -r` on Realme RMX3997, force-stopped,
+     relaunched — `mCurrentFocus=np.nepaready.app/.MainActivity`,
+     `lastUpdateTime=2026-10-12 09:29` (user data preserved).
+   - Release (signed): `client/android/app/build/outputs/apk/release/app-release.apk`
+     (17 MB). `apksigner verify` exit 0; cert `CN=Nepal Navigator, OU=Mobile,
+     O=Nepal Navigator, L=Kathmandu, C=NP`. Keystore lives outside the repo
+     (`~/nepnav-release.jks`, never committed). Note: release uses a different
+     key than the debug builds on the phone — switching needs an uninstall
+     first (Android requirement, wipes app data).
 7. **No public web URL** — deployment not performed; no URL claimed
    (see `docs/deployment.md`).
 

@@ -1,7 +1,7 @@
 {
   "name": "nepready-client",
   "version": "1.0.0",
-  "description": "NepaReady Offline-First PWA Client",
+  "description": "Nepal Navigator Offline PWA Client",
   "type": "module",
   "scripts": {
     "dev": "vite",

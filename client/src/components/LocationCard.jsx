@@ -130,7 +130,7 @@ export default function LocationCard({ location, onSelectLocation, isSelected = 
             </div>
           )}
           <div className="text-[11px] text-slate-400">
-            <strong>{isNepali ? 'स्रोत:' : 'Source:'}</strong> {location.source || 'NepaReady'}
+            <strong>{isNepali ? 'स्रोत:' : 'Source:'}</strong> {location.source || 'Nepal Navigator'}
             {location.verified_at || location.last_verified
               ? ` · ${(location.verified_at || location.last_verified)}` : ''}
           </div>

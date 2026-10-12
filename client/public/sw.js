@@ -1,5 +1,5 @@
-// NepaReady Offline Service Worker
-const CACHE_NAME = 'nepready-v2.2';
+// Nepal Navigator Offline Service Worker
+const CACHE_NAME = 'nepnav-v3.0';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -27,7 +27,7 @@ const STATIC_ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[NepaReady SW] Precaching app shell & offline fallback');
+      console.log('[Nepal Navigator SW] Precaching app shell & offline fallback');
       return cache.addAll(STATIC_ASSETS);
     })
   );
@@ -40,7 +40,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log('[NepaReady SW] Removing obsolete cache:', key);
+            console.log('[Nepal Navigator SW] Removing obsolete cache:', key);
             return caches.delete(key);
           }
         })

@@ -155,7 +155,7 @@ export default function ProfilePage() {
           <div className="space-y-4">
             <div>
               <h2 className="text-xl font-bold text-white">
-                {isLoginMode ? 'Sign In to NepaReady' : 'Create an Account'}
+                {isLoginMode ? 'Sign In to Nepal Navigator' : 'Create an Account'}
               </h2>
               <p className="text-xs text-slate-400 mt-1">
                 Emergency offline features work without an account. Sign in to synchronize your saved family locations across devices.

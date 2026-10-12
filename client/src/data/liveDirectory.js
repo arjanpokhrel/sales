@@ -14,6 +14,10 @@ export const LIVE_AMENITIES = {
   pharmacy: ['pharmacy'],
   atm: ['atm'],
   transport: ['bus_station'],
+  school: ['school', 'college', 'university'],
+  fuel: ['fuel'],
+  restaurant: ['restaurant', 'cafe', 'fast_food'],
+  hotel: ['hotel', 'guest_house', 'hostel', 'lodging'],
 };
 
 const cache = new Map(); // "amenity|lat,rounded|lng,rounded" -> { at, items }
@@ -94,5 +98,5 @@ export async function fetchLivePlaces(categoryId, lat, lng, radiusM = 12000) {
 }
 
 function categoryLabel(c) {
-  return { hospital: 'Hospital', police: 'Police', fire: 'Fire station', pharmacy: 'Pharmacy', atm: 'ATM', transport: 'Bus station' }[c] || 'Place';
+  return { hospital: 'Hospital', police: 'Police', fire: 'Fire station', pharmacy: 'Pharmacy', atm: 'ATM', transport: 'Bus station', school: 'School', fuel: 'Fuel station', restaurant: 'Restaurant', hotel: 'Hotel' }[c] || 'Place';
 }

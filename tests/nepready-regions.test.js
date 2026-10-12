@@ -55,13 +55,13 @@ describe('NepaReady regional data & offline bundle', () => {
     }
   });
 
-  test('Android project uses package np.nepaready.app named NepaReady', () => {
+  test('Android project uses package np.nepaready.app named Nepal Navigator', () => {
     const gradle = fs.readFileSync(
       path.join(ROOT, 'client/android/app/build.gradle'), 'utf8');
     assert.ok(gradle.includes('np.nepaready.app'));
     const strings = fs.readFileSync(
       path.join(ROOT, 'client/android/app/src/main/res/values/strings.xml'), 'utf8');
-    assert.ok(strings.includes('NepaReady'));
+    assert.ok(strings.includes('Nepal Navigator'));
   });
 
   test('New routes ship in the production bundle', () => {
@@ -70,7 +70,7 @@ describe('NepaReady regional data & offline bundle', () => {
     assert.ok(js.length > 0);
     const bundle = js.map((f) =>
       fs.readFileSync(path.join(ROOT, 'client/dist/assets', f), 'utf8')).join('\n');
-    for (const route of ['/provinces', '/destinations', '/download-all', '/bookmarks', '/settings', '/attribution']) {
+    for (const route of ['/provinces', '/destinations', '/download-all', '/bookmarks', '/settings', '/attribution', '/directions', '/home']) {
       assert.ok(bundle.includes(route), `missing route ${route}`);
     }
   });

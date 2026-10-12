@@ -9,6 +9,7 @@ import BottomNavigation from './components/BottomNavigation';
 
 import HomePage from './pages/HomePage';
 import MapPage from './pages/MapPage';
+import DirectionsPage from './pages/DirectionsPage';
 import EmergencyPage from './pages/EmergencyPage';
 import SOSPage from './pages/SOSPage';
 import NearbyHelpPage from './pages/NearbyHelpPage';
@@ -77,8 +78,11 @@ export default function App() {
               <main className="flex-1">
                 <Routes>
                   <Route path="/welcome" element={<WelcomePage />} />
-                  <Route path="/" element={<HomePage />} />
+                  {/* Map-first: the app opens on the full-screen navigator */}
+                  <Route path="/" element={<Navigate to="/map" replace />} />
+                  <Route path="/home" element={<HomePage />} />
                   <Route path="/map" element={<MapPage />} />
+                  <Route path="/directions" element={<DirectionsPage />} />
                   <Route path="/search" element={<SearchPage />} />
                   <Route path="/places/:id" element={<PlaceDetailPage />} />
                   <Route path="/provinces" element={<ProvincesPage />} />

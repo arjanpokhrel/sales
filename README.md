@@ -1,5 +1,7 @@
-# 🇳🇵 NepaReady (नेपारेडी) — Your Nepal. Always Ready.
+# 🧭 Nepal Navigator (नेपाल नेभिगेटर) — Offline Nepal Maps
 
+> **Nepal Navigator (renamed from NepaReady v2).** Package ID `np.nepaready.app`, local data keys and the on-device database name are unchanged so updates keep user data.
+>
 > **v2.0 complete rebuild (2026-10-11).** Web PWA + Android (Capacitor) from one
 > codebase: 27 routes, 7 provinces / 77 districts, 18 destinations, 16 real
 > licensed photos (6.3 MB bundled), Download-All-Nepal manager, bookmarks,

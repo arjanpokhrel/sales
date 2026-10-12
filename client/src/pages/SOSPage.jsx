@@ -30,7 +30,7 @@ Latitude: ${coordinates.latitude.toFixed(6)}
 Longitude: ${coordinates.longitude.toFixed(6)}
 Accuracy: ±${coordinates.accuracy} meters
 Google Maps link: https://maps.google.com/?q=${coordinates.latitude},${coordinates.longitude}
-Sent via NepaReady App.`;
+Sent via Nepal Navigator App.`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shareText);
@@ -42,7 +42,7 @@ Sent via NepaReady App.`;
     if (navigator.share) {
       try {
         await navigator.share({
-          title: '🚨 EMERGENCY SOS — NepaReady',
+          title: '🚨 EMERGENCY SOS — Nepal Navigator',
           text: shareText
         });
       } catch (err) {

@@ -1,4 +1,4 @@
-# Web / PWA deployment — NepaReady
+# Web / PWA deployment — Nepal Navigator
 
 The web app is a static Vite build (`client/dist/`) plus an optional Node API.
 No deployment has been performed from here, and **no public URL is claimed**.
@@ -37,6 +37,16 @@ Copy `.env.example` to `server/.env` first. `DATABASE_URL` is optional
 2. Open **Download All Nepal Data**, download everything.
 3. Enable airplane mode, reload — map (cached areas), search, destinations,
    photos, emergency and bookmarks must all work.
+
+## A fresh browser visit needs internet (important)
+
+A normal first visit downloads the app shell (~0.8 MB JS/CSS), fonts,
+photos (~12 MB) and data files from the host — **that first load needs
+internet**. Only after the Service Worker caches them does the PWA work
+offline. To hand someone a *fully offline* web copy without any internet,
+distribute the complete `client/dist/` folder (e.g. on a USB stick / SD
+card) and serve it from any static server (`npx serve dist`), or install
+the Android APK instead, which ships everything inside.
 
 ## Deployed URL
 

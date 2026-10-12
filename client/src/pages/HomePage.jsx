@@ -43,7 +43,7 @@ export default function HomePage() {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xl">🇳🇵</span>
-            <h2 className="text-lg font-bold text-white tracking-tight">NepaReady</h2>
+            <h2 className="text-lg font-bold text-white tracking-tight">Nepal Navigator</h2>
           </div>
           <p className="text-xs text-slate-400 font-medium">
             {t('app.tagline')}
@@ -326,7 +326,7 @@ export default function HomePage() {
         <p className="font-semibold text-slate-400 mb-1">
           Stay Prepared. Stay Connected. Even When You're Offline.
         </p>
-        <p>NepaReady 🇳🇵 • Authoritative Disaster & Emergency Directory for Nepal</p>
+        <p>Nepal Navigator 🇳🇵 • Authoritative Disaster & Emergency Directory for Nepal</p>
       </footer>
     </div>
   );

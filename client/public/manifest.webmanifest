@@ -1,6 +1,6 @@
 {
-  "name": "NepaReady — Your Nepal. Always Ready.",
-  "short_name": "NepaReady",
+  "name": "Nepal Navigator — Offline Nepal Maps.",
+  "short_name": "Nepal Navigator",
   "description": "Offline-First Nepal Emergency, Navigation and Utility Platform",
   "start_url": "/",
   "display": "standalone",

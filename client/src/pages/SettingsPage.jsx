@@ -70,11 +70,29 @@ export default function SettingsPage() {
       </section>
 
       <section className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
+        <h2 className="font-bold text-white text-sm mb-1">🧭 {lang === 'ne' ? 'थप' : 'More'}</h2>
+        {[
+          { to: '/home', label: lang === 'ne' ? 'ड्यासबोर्ड' : 'Dashboard' },
+          { to: '/provinces', label: lang === 'ne' ? 'प्रदेशहरू' : 'Provinces' },
+          { to: '/destinations', label: lang === 'ne' ? 'गन्तव्यहरू' : 'Destinations' },
+          { to: '/gallery', label: lang === 'ne' ? 'फोटो ग्यालरी' : 'Photo gallery' },
+          { to: '/guides', label: lang === 'ne' ? 'सुरक्षा निर्देशिका' : 'Safety guides' },
+          { to: '/stays', label: lang === 'ne' ? 'होटल र खाना' : 'Hotels & food' },
+          { to: '/emergency', label: lang === 'ne' ? 'आपतकालीन' : 'Emergency' },
+          { to: '/sos', label: 'SOS' },
+        ].map((l) => (
+          <Link key={l.to} to={l.to} className="block p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-sm font-semibold text-slate-100">
+            {l.label}
+          </Link>
+        ))}
+      </section>
+
+      <section className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
         <h2 className="font-bold text-white text-sm mb-1 flex items-center gap-1.5">
           <Info className="w-4 h-4 text-sky-400" /> {lang === 'ne' ? 'जानकारी' : 'About'}
         </h2>
         {[
-          { to: '/about', label: lang === 'ne' ? 'NepaReady बारे' : 'About NepaReady' },
+          { to: '/about', label: lang === 'ne' ? 'Nepal Navigator बारे' : 'About Nepal Navigator' },
           { to: '/attribution', label: lang === 'ne' ? 'स्रोत र श्रेय' : 'Data sources & credits' },
           { to: '/help-offline', label: lang === 'ne' ? 'अफलाइन सहायता' : 'Offline help', icon: CircleHelp },
         ].map((l) => (

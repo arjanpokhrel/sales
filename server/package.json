@@ -1,7 +1,7 @@
 {
   "name": "nepready-server",
   "version": "1.0.0",
-  "description": "NepaReady Express API Server",
+  "description": "Nepal Navigator API Server",
   "main": "src/index.js",
   "type": "module",
   "scripts": {

@@ -14,15 +14,16 @@ export default function Header() {
   const location = useLocation();
 
   const navLinks = [
-    { to: '/', label: t('nav.home') },
+    { to: '/map', label: t('nav.map') },
+    { to: '/directions', label: lang === 'ne' ? 'बाटो' : 'Directions' },
     { to: '/provinces', label: t('nav.provinces') },
     { to: '/destinations', label: t('nav.explore') },
-    { to: '/map', label: t('nav.map') },
     { to: '/emergency', label: t('nav.emergency'), isEmergency: true },
     { to: '/help', label: t('nav.help') },
     { to: '/guides', label: t('nav.guides') },
     { to: '/packs', label: t('nav.packs') },
     { to: '/bookmarks', label: t('nav.saved') },
+    { to: '/home', label: t('nav.home') },
     { to: '/profile', label: t('nav.profile') },
   ];
 

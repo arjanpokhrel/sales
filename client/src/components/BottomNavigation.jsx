@@ -3,30 +3,27 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useNetwork } from '../context/NetworkContext';
 import {
-  Home, Map, Mountain, BookOpen, Bookmark, ShieldAlert,
-  Search, Languages, Radio
+  Compass, Bookmark, Route as RouteIcon, MapPin, MoreHorizontal,
+  Search, Languages, ShieldAlert, Radio
 } from 'lucide-react';
 
-// Mobile bottom command bar: the header lives HERE on phones (nothing on
-// top), so every control fits the display and the thumb. Desktop keeps the
-// top Header (see Header.jsx, lg-only).
+// Map-first bottom command bar: Explore (map), Saved, Directions, Nearby,
+// More. Utility row (search, status, language, SOS) stays thumb-reachable.
 export default function BottomNavigation() {
   const { lang, setLang, t } = useLanguage();
   const location = useLocation();
   const { isOnline, simulateOffline, toggleSimulateOffline } = useNetwork();
 
   const items = [
-    { to: '/', label: t('nav.home'), icon: Home },
-    { to: '/destinations', label: t('nav.explore'), icon: Mountain },
-    { to: '/map', label: t('nav.map'), icon: Map },
-    { to: '/emergency', label: t('nav.emergency'), icon: ShieldAlert, isEmergency: true },
+    { to: '/map', label: lang === 'ne' ? 'घुम्नुहोस्' : 'Explore', icon: Compass },
     { to: '/bookmarks', label: t('nav.saved'), icon: Bookmark },
-    { to: '/guides', label: t('nav.guides'), icon: BookOpen },
+    { to: '/directions', label: lang === 'ne' ? 'बाटो' : 'Directions', icon: RouteIcon, isDirections: true },
+    { to: '/help', label: lang === 'ne' ? 'नजिक' : 'Nearby', icon: MapPin },
+    { to: '/settings', label: lang === 'ne' ? 'थप' : 'More', icon: MoreHorizontal },
   ];
 
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 pb-safe">
-      {/* Demo offline banner (was in the top header) */}
       {simulateOffline && (
         <div className="bg-amber-600/95 text-amber-950 font-bold text-[11px] py-1 px-3 text-center flex items-center justify-center gap-2">
           <Radio className="w-3.5 h-3.5 animate-pulse" />
@@ -38,15 +35,14 @@ export default function BottomNavigation() {
       )}
 
       <div className="bg-[#0B192C]/98 border-t border-slate-800 backdrop-blur-lg">
-        {/* Utility row — search, language, status, SOS (moved from top header) */}
         <div className="flex items-center gap-2 px-3 pt-2">
           <Link
             to="/search"
-            className="flex items-center gap-1.5 flex-1 min-w-0 px-3 py-2 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-400 text-xs"
+            className="flex items-center gap-1.5 flex-1 min-w-0 px-3 py-2 rounded-full bg-slate-800/80 border border-slate-700 text-slate-400 text-xs"
           >
             <Search className="w-4 h-4 flex-shrink-0" />
             <span className="truncate">
-              {lang === 'ne' ? 'खोज्नुहोस्…' : 'Search places…'}
+              {lang === 'ne' ? 'ठाउँ खोज्नुहोस्…' : 'Search Nepal…'}
             </span>
           </Link>
 
@@ -76,30 +72,30 @@ export default function BottomNavigation() {
           </Link>
         </div>
 
-        {/* Tabs */}
-        <nav className="flex items-center justify-around h-16 px-1">
+        <nav className="flex items-center justify-around h-16 px-1" aria-label="Primary">
           {items.map((item) => {
             const isActive = location.pathname === item.to
               || (item.to !== '/' && location.pathname.startsWith(item.to + '/'));
             const Icon = item.icon;
 
-            if (item.isEmergency) {
+            if (item.isDirections) {
               return (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   className="flex flex-col items-center justify-center -mt-5"
+                  aria-label={item.label}
                 >
                   <div
                     className={`w-13 h-13 rounded-full flex items-center justify-center shadow-lg transition-transform active:scale-95 border-2 ${
                       isActive
-                        ? 'bg-red-500 border-white text-white shadow-red-600/50'
-                        : 'bg-red-600 border-red-400/60 text-white shadow-red-950/60 hover:bg-red-500'
+                        ? 'bg-sky-500 border-white text-white shadow-sky-600/50'
+                        : 'bg-sky-700 border-sky-400/60 text-white shadow-sky-950/60 hover:bg-sky-600'
                     }`}
                   >
-                    <Icon className="w-6 h-6 animate-pulse" />
+                    <Icon className="w-6 h-6" />
                   </div>
-                  <span className="text-[11px] font-bold text-red-400 mt-1">
+                  <span className="text-[11px] font-bold text-sky-300 mt-1">
                     {item.label}
                   </span>
                 </NavLink>

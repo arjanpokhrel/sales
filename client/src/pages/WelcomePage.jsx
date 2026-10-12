@@ -19,7 +19,7 @@ export default function WelcomePage() {
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-md p-8 rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl text-center">
         <div className="flex justify-center mb-4"><NepaLogo size="lg" /></div>
-        <h1 className="text-2xl font-black text-white">NepaReady</h1>
+        <h1 className="text-2xl font-black text-white">Nepal Navigator</h1>
         <p className="text-sm text-slate-400 mt-1 mb-1">Offline Nepal, Always Ready</p>
         <p className="text-sm text-slate-400 mb-6">अफलाइन नेपाल, सधैँ तयार</p>
         <p className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">

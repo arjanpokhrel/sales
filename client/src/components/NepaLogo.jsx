@@ -1,6 +1,6 @@
 import React from 'react';
 
-// New NepaReady summit mark: navy disc, rising red sun, white triple peaks
+// New Nepal Navigator summit mark: navy disc, rising red sun, white triple peaks
 // with snowcaps, emerald ridge and a red location pin. Matches logo.svg.
 export default function NepaLogo({ size = 'md', showText = true, className = '' }) {
   const sizeMap = {
@@ -13,7 +13,7 @@ export default function NepaLogo({ size = 'md', showText = true, className = '' 
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
       <div className={`relative ${sizeMap[size] || sizeMap.md} flex-shrink-0`}>
-        <svg viewBox="0 0 1024 1024" className="w-full h-full drop-shadow-md" role="img" aria-label="NepaReady logo">
+        <svg viewBox="0 0 1024 1024" className="w-full h-full drop-shadow-md" role="img" aria-label="Nepal Navigator logo">
           <defs>
             <radialGradient id="nrbg" cx="50%" cy="38%" r="75%">
               <stop offset="0%" stopColor="#1B3358" />
@@ -42,7 +42,7 @@ export default function NepaLogo({ size = 'md', showText = true, className = '' 
         <div className="flex flex-col leading-none">
           <div className="flex items-center gap-1.5">
             <span className="font-extrabold tracking-tight text-white text-lg md:text-xl">
-              Nepa<span className="text-red-500">Ready</span>
+              Nepal<span className="text-red-500"> Navigator</span>
             </span>
             <span className="text-xs">🇳🇵</span>
           </div>
