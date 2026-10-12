@@ -17,15 +17,34 @@ export function NetworkProvider({ children }) {
 
   // GPS state
   const [gpsStatus, setGpsStatus] = useState('requesting'); // 'available', 'unavailable', 'requesting'
-  const [coordinates, setCoordinates] = useState({
-    latitude: 26.4525, // Biratnagar default center
-    longitude: 87.2718,
-    accuracy: 15,
-    altitude: null,
-    heading: null, // degrees, when the device reports motion
-    speed: null, // m/s, when the device reports motion
-    updatedAt: null,
-    isRealGps: false
+  // GPS state — boots from the last known fix so the map opens at the
+  // user's own place even fully offline (no GPS/server needed on boot).
+  const [coordinates, setCoordinates] = useState(() => {
+    try {
+      const raw = localStorage.getItem('nepready_last_gps');
+      if (raw) {
+        const p = JSON.parse(raw);
+        if (p && p.lat > 26 && p.lat < 31 && p.lng > 80 && p.lng < 89) {
+          return {
+            latitude: p.lat, longitude: p.lng,
+            accuracy: p.acc || 50, altitude: null,
+            heading: null, speed: null, updatedAt: p.at || null,
+            isRealGps: false, isLastKnown: true
+          };
+        }
+      }
+    } catch { /* private mode */ }
+    return {
+      latitude: 26.4525, // Biratnagar default center
+      longitude: 87.2718,
+      accuracy: 15,
+      altitude: null,
+      heading: null, // degrees, when the device reports motion
+      speed: null, // m/s, when the device reports motion
+      updatedAt: null,
+      isRealGps: false,
+      isLastKnown: false
+    };
   });
 
   // Check health endpoint for real network egress
@@ -106,7 +125,7 @@ export function NetworkProvider({ children }) {
 
     const watchId = navigator.geolocation.watchPosition(
       (position) => {
-        setCoordinates({
+        const fix = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
           accuracy: Math.round(position.coords.accuracy || 10),
@@ -116,8 +135,15 @@ export function NetworkProvider({ children }) {
           speed: position.coords.speed != null && !Number.isNaN(position.coords.speed)
             ? Number(position.coords.speed.toFixed(1)) : null,
           updatedAt: Date.now(),
-          isRealGps: true
-        });
+          isRealGps: true,
+          isLastKnown: false
+        };
+        setCoordinates(fix);
+        try {
+          localStorage.setItem('nepready_last_gps', JSON.stringify({
+            lat: fix.latitude, lng: fix.longitude, acc: fix.accuracy, at: fix.updatedAt
+          }));
+        } catch { /* private mode */ }
         setGpsStatus('available');
       },
       (error) => {

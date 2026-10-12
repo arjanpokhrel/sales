@@ -1,15 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <!-- Outer Shield Badge -->
-  <path d="M50 8 L88 22 V50 C88 72 50 92 50 92 C50 92 12 72 12 50 V22 Z" fill="#0B192C" stroke="#DC2626" stroke-width="4" stroke-linejoin="round"/>
-  
-  <!-- Subtle Nepal Mountain Peaks (Himalayas) inside Shield -->
-  <path d="M22 62 L38 38 L50 52 L64 32 L80 62 Z" fill="#1E293B" stroke="#64748B" stroke-width="2"/>
-  <path d="M38 38 L43 45 L34 47 Z" fill="#F8FAFC"/>
-  <path d="M64 32 L70 41 L60 43 Z" fill="#F8FAFC"/>
-
-  <!-- Nepal Emergency Pin Symbol -->
-  <path d="M50 36 C42 36 36 42 36 50 C36 60 50 74 50 74 C50 74 64 60 64 50 C64 42 58 36 50 36 Z" fill="#DC2626" stroke="#FEF2F2" stroke-width="2"/>
-  
-  <!-- Center White Protection Dot -->
-  <circle cx="50" cy="48" r="5" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="nbg" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#1B3358"/>
+      <stop offset="60%" stop-color="#0E1E38"/>
+      <stop offset="100%" stop-color="#0B192C"/>
+    </radialGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F87171"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#nbg)"/>
+  <!-- rising sun -->
+  <circle cx="672" cy="318" r="104" fill="url(#sun)"/>
+  <!-- peaks -->
+  <polygon points="232,668 372,372 496,548 596,348 792,668" fill="#334155"/>
+  <polygon points="252,668 384,396 496,548 592,376 772,668" fill="#E2E8F0"/>
+  <!-- snowcaps -->
+  <polygon points="372,372 402,418 372,436 344,418" fill="#FFFFFF"/>
+  <polygon points="596,348 628,398 596,418 566,398" fill="#FFFFFF"/>
+  <!-- emerald ridge -->
+  <path d="M120,668 Q300,600 500,656 Q700,712 904,648 L904,780 L120,780 Z" fill="url(#hill)" opacity="0.9"/>
+  <!-- location pin -->
+  <path d="M512,560 C470,560 438,592 438,632 C438,688 512,764 512,764 C512,764 586,688 586,632 C586,592 554,560 512,560 Z" fill="#DC2626" stroke="#F8FAFC" stroke-width="18"/>
+  <circle cx="512" cy="630" r="34" fill="#FFFFFF"/>
 </svg>

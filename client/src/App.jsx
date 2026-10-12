@@ -70,7 +70,7 @@ export default function App() {
       <NetworkProvider>
         <AuthProvider>
           <BrowserRouter>
-            <div className="min-h-screen flex flex-col bg-[#080E1A] text-slate-100 pb-20 lg:pb-0 font-sans">
+            <div className="min-h-screen flex flex-col bg-[#080E1A] text-slate-100 pb-[132px] lg:pb-0 font-sans">
               <FirstRunGate />
               <Header />
 

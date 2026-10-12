@@ -513,7 +513,7 @@ export default function MapPage() {
 
       {/* Bottom Sheet Drawer for Selected Location */}
       {selectedLocation && (
-        <div className="z-30 absolute bottom-16 lg:bottom-4 left-4 right-4 max-w-lg mx-auto animate-slide-up">
+        <div className="z-30 absolute bottom-[140px] lg:bottom-4 left-4 right-4 max-w-lg mx-auto animate-slide-up">
           <div className="relative">
             <button
               onClick={clearSelection}

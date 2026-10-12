@@ -31,7 +31,8 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 bg-[#0B192C]/95 backdrop-blur-md border-b border-slate-800 transition-colors">
+    // Desktop-only header: on phones every control lives in the bottom bar.
+    <header className="hidden lg:block sticky top-0 z-40 bg-[#0B192C]/95 backdrop-blur-md border-b border-slate-800 transition-colors">
       {/* Top Banner for Demo Mode / Simulated Offline */}
       {simulateOffline && (
         <div className="bg-amber-600/90 text-amber-950 font-bold text-xs py-1 px-4 text-center flex items-center justify-center gap-2">
