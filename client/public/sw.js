@@ -1,5 +1,5 @@
 // NepaReady Offline Service Worker
-const CACHE_NAME = 'nepready-v2.1';
+const CACHE_NAME = 'nepready-v2.2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -7,6 +7,13 @@ const STATIC_ASSETS = [
   '/logo.svg',
   '/manifest.webmanifest',
   '/photos/attribution.json',
+  '/data/locations.json',
+  '/data/guides.json',
+  '/data/transport-routes.json',
+  '/data/packs.json',
+  '/data/categories.json',
+  '/data/emergency.json',
+  '/data/manifest.json',
   '/fonts/inter-400-latin.woff2',
   '/fonts/inter-600-latin.woff2',
   '/fonts/inter-700-latin.woff2',

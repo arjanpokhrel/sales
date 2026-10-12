@@ -201,8 +201,8 @@ export default function MapPage() {
     <div className="relative h-[calc(100vh-4rem)] flex flex-col overflow-hidden bg-[#0B192C]">
       {/* Top Filter and Search Bar */}
       <div className="z-20 bg-slate-900/95 border-b border-slate-800 p-3 sm:px-6 space-y-2 backdrop-blur-md shadow-md">
-        <div className="flex items-center gap-2">
-          <div className="relative flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="relative flex-1 min-w-[180px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"

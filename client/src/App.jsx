@@ -36,6 +36,7 @@ import AboutPage from './pages/AboutPage';
 import AttributionPage from './pages/AttributionPage';
 import HelpOfflinePage from './pages/HelpOfflinePage';
 import { seedEssential } from './offline/db';
+import { seedFromBundle } from './offline/seedFromBundle';
 import { setupNative } from './native';
 
 function FirstRunGate() {
@@ -59,7 +60,9 @@ function FirstRunGate() {
 
 export default function App() {
   useEffect(() => {
-    seedEssential().catch((e) => console.warn('Essential seed failed:', e));
+    seedEssential()
+      .then(() => seedFromBundle())
+      .catch((e) => console.warn('Essential seed failed:', e));
   }, []);
 
   return (

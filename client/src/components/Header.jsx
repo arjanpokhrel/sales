@@ -75,10 +75,12 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Controls & Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Status Indicator (Compact) */}
-            <StatusIndicator compact />
+          {/* Controls & Actions — compact so everything fits a 360px phone */}
+          <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
+            {/* Status Indicator (Compact, hidden on small phones — Home shows it) */}
+            <div className="hidden min-[420px]:block">
+              <StatusIndicator compact />
+            </div>
 
             {/* Global Search */}
             <Link
@@ -125,7 +127,7 @@ export default function Header() {
             {/* Prominent SOS Button */}
             <Link
               to="/sos"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs sm:text-sm font-bold shadow-md shadow-red-900/30 transition transform active:scale-95 animate-sos-pulse"
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs sm:text-sm font-bold shadow-md shadow-red-900/30 transition transform active:scale-95 animate-sos-pulse"
             >
               <ShieldAlert className="w-4 h-4" />
               <span>SOS</span>
