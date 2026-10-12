@@ -13,6 +13,8 @@ Nothing below is estimated: every number was read from the built artifacts.
 | Emergency numbers | 8 (100, 101, 102, 1155, 1114, 103, 1098, 021-460111) | Nepal Police / NEOC public listings, verified 2026-10-11 |
 | Real photos | 16 files, 6.3 MB | Wikimedia Commons (CC BY-SA 2.5–4.0); per-file author+license+source URL in `client/public/photos/attribution.json` and in-app Attribution page |
 | Disaster guides | 6 (earthquake, flood, landslide, fire, snake-bite, first-aid) | bundled seed |
+| Directory places | 37 (21 hospitals, 11 police, fire, pharmacy, transport) with honest verified/approximate flags | server seed → exported to `client/public/data/locations.json`, auto-seeded into phone IndexedDB on first open (no server needed) |
+| Transport routes | 3 regional routes | bundled seed |
 | Transport routes | 3 regional routes | bundled seed |
 | App bundle | `client/dist` ≈ 7.2 MB total (JS/CSS ≈ 0.8 MB + photos 6.3 MB) | measured `du` |
 
