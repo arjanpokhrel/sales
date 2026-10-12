@@ -202,7 +202,9 @@ export default function MapPage() {
   };
 
   return (
-    <div className="relative h-[calc(100vh-4rem)] flex flex-col overflow-hidden bg-[#0B192C]">
+    // Full-screen navigator: fills everything between the top header
+    // (desktop only) and the bottom command bar (mobile only).
+    <div className="relative h-[calc(100dvh-160px)] lg:h-[calc(100dvh-4rem)] flex flex-col overflow-hidden bg-[#0B192C]">
       {/* Top Filter and Search Bar */}
       <div className="z-20 bg-slate-900/95 border-b border-slate-800 p-3 sm:px-6 space-y-2 backdrop-blur-md shadow-md">
         <div className="flex flex-wrap items-center gap-2">
@@ -517,7 +519,7 @@ export default function MapPage() {
 
       {/* Bottom Sheet Drawer for Selected Location */}
       {selectedLocation && (
-        <div className="z-30 absolute bottom-[140px] lg:bottom-4 left-4 right-4 max-w-lg mx-auto animate-slide-up">
+        <div className="z-30 absolute bottom-4 left-4 right-4 max-w-lg mx-auto animate-slide-up">
           <div className="relative">
             <button
               onClick={clearSelection}

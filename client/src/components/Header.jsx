@@ -55,15 +55,15 @@ export default function Header() {
             <NepaLogo size="md" />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* Desktop Nav (scrolls instead of wrapping on narrow laptops) */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 flex-1 min-w-0 overflow-x-auto px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {navLinks.map((link) => {
               const active = location.pathname === link.to;
               return (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap flex-shrink-0 transition-all ${
                     link.isEmergency
                       ? 'bg-red-600/20 text-red-400 border border-red-500/40 hover:bg-red-600/30'
                       : active

@@ -23,7 +23,7 @@ export default function BottomNavigation() {
   ];
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 pb-safe">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-[1200] pb-safe">
       {simulateOffline && (
         <div className="bg-amber-600/95 text-amber-950 font-bold text-[11px] py-1 px-3 text-center flex items-center justify-center gap-2">
           <Radio className="w-3.5 h-3.5 animate-pulse" />
@@ -46,7 +46,7 @@ export default function BottomNavigation() {
             </span>
           </Link>
 
-          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold border whitespace-nowrap ${
+          <div className={`hidden min-[380px]:flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold border whitespace-nowrap ${
             isOnline
               ? 'bg-emerald-950/70 border-emerald-800 text-emerald-300'
               : 'bg-red-950/70 border-red-800 text-red-300'

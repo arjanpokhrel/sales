@@ -75,7 +75,7 @@ export default function App() {
               <FirstRunGate />
               <Header />
 
-              <main className="flex-1">
+              <main className="flex-1 pt-7 lg:pt-0">
                 <Routes>
                   <Route path="/welcome" element={<WelcomePage />} />
                   {/* Map-first: the app opens on the full-screen navigator */}
